@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FaithTech.dev — Building the Future of Faith & Technology</title>
+  <meta name="description" content="Product and technology consulting for churches, non-profits, and Bible organizations. Strategy, UX, and engineering leadership from a former Head of Product at YouVersion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;          /* deep navy */
+      --bg-2:#0e1530;        /* slightly lighter navy */
+      --text:#e9eefc;        /* off-white */
+      --muted:#a8b3d6;       /* muted text */
+      --brand:#3aa0ff;       /* electric blue */
+      --brand-2:#ffd166;     /* warm gold accent */
+      --card:#0f1838;        /* card background */
+      --border:#1f2b55;      /* border */
+      --success:#3ddc97;
+      --shadow: 0 10px 30px rgba(6,10,30,.35);
+      --radius:18px;
+      --radius-sm:12px;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:radial-gradient(1200px 650px at 80% -10%, rgba(58,160,255,.15), transparent 50%),
+                                              radial-gradient(900px 500px at -10% 10%, rgba(255,209,102,.08), transparent 50%),
+                                              var(--bg);
+               color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Layout */
+    .container{max-width:var(--maxw); margin-inline:auto; padding: clamp(16px, 2.4vw, 28px)}
+    header{position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(180deg, rgba(11,16,32,.85), rgba(11,16,32,.55) 70%, transparent); z-index:20; border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:34px; height:34px; border-radius:10px; background:conic-gradient(from 200deg at 40% 40%, var(--brand), var(--brand-2), var(--brand)); box-shadow:0 6px 16px rgba(58,160,255,.35)}
+    .brand h1{font-size:18px; letter-spacing:.4px; margin:0; font-weight:700}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    nav a{color:var(--text); opacity:.9}
+    .cta{display:inline-block; background:linear-gradient(135deg, var(--brand), #7cc4ff); color:#061028; font-weight:700; padding:12px 16px; border-radius:14px; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.12)}
+    .cta.secondary{background:transparent; color:var(--text); border:1px solid var(--border)}
+
+    /* Hero */
+    .hero{padding: clamp(56px, 8vw, 110px) 0}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center}
+    .eyebrow{color:var(--brand-2); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+    h2{font-size: clamp(32px, 5.2vw, 64px); line-height:1.05; margin:8px 0 16px}
+    .lead{font-size: clamp(16px, 2.2vw, 20px); color:var(--muted); max-width:58ch}
+    .hero-ctas{display:flex; gap:14px; margin-top:24px; flex-wrap:wrap}
+
+    /* Card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px}
+    .metric .num{font-weight:800; font-size:28px}
+    .metric .label{color:var(--muted); font-size:12px}
+
+    /* Sections */
+    section{padding: clamp(48px, 7vw, 84px) 0}
+    .section-title{font-size: clamp(22px, 3.2vw, 36px); margin:0 0 14px}
+    .section-sub{color:var(--muted); max-width:70ch}
+
+    /* Services */
+    .service-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; margin-top:22px}
+    .service{padding:20px}
+    .service h3{margin:0 0 8px; font-size:18px}
+    .service p{margin:0; color:var(--muted)}
+
+    /* Case Studies */
+    .case-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:22px}
+    .case{position:relative; overflow:hidden}
+    .case .tag{position:absolute; top:14px; left:14px; background:rgba(6,16,40,.7); border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px}
+    .case .thumb{height:180px; border-radius:14px; background:linear-gradient(135deg, rgba(58,160,255,.25), rgba(255,209,102,.18)), linear-gradient(180deg, #1a2550, #0c1230)}
+    .case h4{margin:12px 0 6px}
+    .case p{margin:0; color:var(--muted)}
+
+    /* Thought */
+    .thoughts{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px}
+    .thought{padding:18px}
+
+    /* Contact */
+    form{display:grid; gap:12px; margin-top:18px}
+    input, textarea{background:transparent; border:1px solid var(--border); color:var(--text); padding:12px 14px; border-radius:12px; outline:none}
+    input:focus, textarea:focus{border-color:var(--brand)}
+    textarea{min-height:120px; resize:vertical}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.06); padding:24px 0; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 1000px){
+      .hero-grid{grid-template-columns:1fr}
+      .service-grid{grid-template-columns:repeat(2, 1fr)}
+      .case-grid{grid-template-columns:repeat(2, 1fr)}
+      .thoughts{grid-template-columns:repeat(2, 1fr)}
+    }
+    @media (max-width: 640px){
+      nav ul{display:none}
+      .service-grid, .case-grid, .thoughts{grid-template-columns:1fr}
+    }
+
+    /* Micro-interactions */
+    .hover-rise{transition: transform .25s ease, box-shadow .25s ease}
+    .hover-rise:hover{transform: translateY(-4px); box-shadow: 0 16px 40px rgba(6,10,30,.45)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>FaithTech.dev</h1>
+      </div>
+      <nav aria-label="primary">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#contact" class="cta">Let’s Talk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Product & Tech Leadership for Ministry</div>
+          <h2>Building the Future of <span style="background:linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent">Faith & Technology</span></h2>
+          <p class="lead">I help churches, non-profits, Bible societies, and content partners craft world-class digital products. Strategy, UX, and engineering leadership—from a former Head of Product at a top Bible app.</p>
+          <div class="hero-ctas">
+            <a class="cta" href="#contact">Book a Strategy Call</a>
+            <a class="cta secondary" href="#work">See Work</a>
+          </div>
+          <div class="metrics">
+            <div class="card metric hover-rise">
+              <div class="num">300M+</div>
+              <div class="label">users served across products led</div>
+            </div>
+            <div class="card metric hover-rise">
+              <div class="num">100+ partnerships</div>
+              <div class="label">with Bible societies & ministries</div>
+            </div>
+            <div class="card metric hover-rise">
+              <div class="num">10x impact</div>
+              <div class="label">through strategy & product excellence</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" aria-label="Illustration" style="height:100%; display:grid; place-items:center">
+            <svg width="100%" height="320" viewBox="0 0 600 320" role="img" aria-label="Abstract network illustration">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0%" stop-color="rgba(58,160,255,.7)"/>
+                  <stop offset="100%" stop-color="rgba(255,209,102,.6)"/>
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#g1)" stroke-width="1.4">
+                <path d="M10,280 C130,200 230,320 340,210 C430,120 520,130 590,70" />
+                <path d="M10,220 C120,180 260,250 360,160 C470,70 520,110 590,30" opacity=".7"/>
+                <circle cx="120" cy="220" r="5" fill="var(--brand)" />
+                <circle cx="300" cy="200" r="5" fill="var(--brand-2)" />
+                <circle cx="520" cy="90" r="5" fill="var(--brand)" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <h3 class="section-title">Services</h3>
+        <p class="section-sub">From vision to execution—tailored for faith-driven organizations.</p>
+        <div class="service-grid">
+          <article class="card service hover-rise">
+            <h3>Product Strategy</h3>
+            <p>Vision & roadmap, discovery, user research, and KPI design that ladders to mission impact.</p>
+          </article>
+          <article class="card service hover-rise">
+            <h3>Technology Consulting</h3>
+            <p>Architecture reviews, platform choices, vendor evaluation, and cost/performance tuning.</p>
+          </article>
+          <article class="card service hover-rise">
+            <h3>Experience Design</h3>
+            <p>Mobile-first UX, design systems, and growth loops for engagement and retention.</p>
+          </article>
+          <article class="card service hover-rise">
+            <h3>Partnerships</h3>
+            <p>APIs, licensing, and collaboration models with Bible societies and content partners.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES / WORK -->
+    <section id="work">
+      <div class="container">
+        <h3 class="section-title">Selected Work</h3>
+        <p class="section-sub">Impact snapshots from large-scale Bible engagement to platform modernization.</p>
+        <div class="case-grid">
+          <article class="card case hover-rise">
+            <span class="tag">Engagement</span>
+            <div class="thumb"></div>
+            <h4>Global Scripture Engagement</h4>
+            <p>Drove double-digit growth with habit formation, community, and content personalization.</p>
+          </article>
+          <article class="card case hover-rise">
+            <span class="tag">Platform</span>
+            <div class="thumb"></div>
+            <h4>API Modernization for Bible Publisher</h4>
+            <p>Reduced latency and unlocked new licensing models with a secure, scalable API layer.</p>
+          </article>
+          <article class="card case hover-rise">
+            <span class="tag">Transformation</span>
+            <div class="thumb"></div>
+            <h4>Digital Strategy for National Ministry</h4>
+            <p>Roadmap, org design, and vendor selection to reach Gen Z across channels.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h3 class="section-title">From YouVersion to Your Mission</h3>
+        <p class="section-sub">Leadership from a former Head of Product at one of the most widely used Bible apps. I partner with teams to clarify strategy, build delightful products, and scale with excellence—without losing the heart of the mission.</p>
+        <div class="card" style="margin-top:18px">
+          <ul style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;list-style:inside disc; padding-left:14px; margin:0">
+            <li>Scaled products serving hundreds of millions</li>
+            <li>100+ partnerships with Bible societies & ministries</li>
+            <li>Team building, processes, and org design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIGHTS / BLOG -->
+    <section id="insights">
+      <div class="container">
+        <h3 class="section-title">Insights</h3>
+        <p class="section-sub">Short, actionable POVs at the intersection of faith and technology.</p>
+        <div class="thoughts">
+          <article class="card thought hover-rise">
+            <h4>AI and the Future of Bible Engagement</h4>
+            <p class="section-sub">Where personalization meets spiritual formation—without compromising trust.</p>
+          </article>
+          <article class="card thought hover-rise">
+            <h4>What Churches Can Learn from Product Teams</h4>
+            <p class="section-sub">Discovery, iteration, and KPIs that measure what really matters.</p>
+          </article>
+          <article class="card thought hover-rise">
+            <h4>Build Tech That Scales Without Losing Your Soul</h4>
+            <p class="section-sub">Operational excellence and ethics as first-class features.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h3 class="section-title">Ready to build what’s next?</h3>
+        <p class="section-sub">Tell me a bit about your organization and goals. I’ll reply with next steps and a free discovery call.</p>
+        <form name="contact" netlify>
+          <input type="hidden" name="form-name" value="contact">
+          <label>
+            <span style="display:block; margin:0 0 6px; color:var(--muted)">Name</span>
+            <input name="name" required placeholder="Your name" />
+          </label>
+          <label>
+            <span style="display:block; margin:0 0 6px; color:var(--muted)">Organization</span>
+            <input name="org" placeholder="Church, ministry, publisher…" />
+          </label>
+          <label>
+            <span style="display:block; margin:0 0 6px; color:var(--muted)">Email</span>
+            <input type="email" name="email" required placeholder="you@example.org" />
+          </label>
+          <label>
+            <span style="display:block; margin:0 0 6px; color:var(--muted)">How can I help?</span>
+            <textarea name="message" placeholder="Describe your goals, timeline, and challenges."></textarea>
+          </label>
+          <div style="display:flex; gap:10px; align-items:center">
+            <button class="cta" type="submit">Send</button>
+            <small style="color:var(--muted)">I’ll get back within 1–2 business days.</small>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap">
+      <div>© <span id="year"></span> FaithTech.dev • All rights reserved</div>
+      <div>Based in • Remote / Global</div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear()
+  </script>
+</body>
+</html>
