@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 222 52% 8%;
+    --foreground: 224 70% 95%;
+
+    --card: 228 56% 14%;
+    --card-foreground: 224 70% 95%;
+
+    --popover: 228 56% 14%;
+    --popover-foreground: 224 70% 95%;
+
+    --primary: 207 100% 62%;
+    --primary-foreground: 222 52% 8%;
+
+    --secondary: 41 100% 70%;
+    --secondary-foreground: 222 52% 8%;
+
+    --muted: 228 55% 12%;
+    --muted-foreground: 224 40% 74%;
+
+    --accent: 41 100% 70%;
+    --accent-foreground: 222 52% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 224 70% 95%;
+
+    --border: 228 45% 23%;
+    --input: 228 45% 23%;
+    --ring: 207 100% 62%;
+
+    --success: 152 68% 56%;
+
+    --radius: 1.125rem;
+    --radius-sm: 0.75rem;
+
+    --sidebar-background: 228 55% 12%;
+    --sidebar-foreground: 224 70% 95%;
+    --sidebar-primary: 207 100% 62%;
+    --sidebar-primary-foreground: 222 52% 8%;
+    --sidebar-accent: 228 56% 14%;
+    --sidebar-accent-foreground: 224 70% 95%;
+    --sidebar-border: 228 45% 23%;
+    --sidebar-ring: 207 100% 62%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(207 100% 62%), hsl(41 100% 70%));
+    --gradient-radial: radial-gradient(1200px 650px at 80% -10%, rgba(58,160,255,.15), transparent 50%),
+                        radial-gradient(900px 500px at -10% 10%, rgba(255,209,102,.08), transparent 50%);
+    --shadow: 0 10px 30px rgba(6,10,30,.35);
+    --shadow-glow: 0 6px 16px rgba(58,160,255,.35);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 650px at 80% -10%, rgba(58,160,255,.15), transparent 50%),
+                radial-gradient(900px 500px at -10% 10%, rgba(255,209,102,.08), transparent 50%),
+                hsl(var(--background));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer utilities {
+  .hover-rise {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-rise {
+    transition: none;
+  }
+}
