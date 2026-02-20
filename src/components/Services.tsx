@@ -13,7 +13,7 @@ const Services = () => (
     <div className="container mx-auto px-6">
       <h3 className="text-3xl md:text-4xl font-bold mb-4">How I help</h3>
       <p className="text-muted-foreground max-w-2xl mb-8">
-        From vision to execution—tailored for church leaders, faith tech teams, and Christian entrepreneurs.
+        From vision to execution—tailored for church leaders, faith tech teams, and Christian entrepreneurs. I bring product strategy and hands-on execution so your mission translates into clear roadmaps, strong technology choices, and experiences that keep people engaged. Whether you need to define KPIs that tie to impact, evaluate platforms and vendors, design mobile-first experiences and growth loops, or structure partnerships and APIs with Bible societies and content partners, I work as a single point of contact—no handoffs, no account managers—so you can ship with clarity and scale with purpose.
       </p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, index) => {

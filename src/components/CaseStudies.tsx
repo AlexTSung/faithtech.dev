@@ -12,8 +12,8 @@ const cases = [
     description: "Drove double-digit growth with habit formation, community, and content personalization.",
     metrics: [
       { label: "Installs", value: "109M+", icon: Zap },
-      { label: "MAU (L28)", value: "53.5M", icon: Users },
-      { label: "DAU", value: "5.7M", icon: TrendingUp },
+      { label: "MAU (L28)", value: "53.5M+", icon: Users },
+      { label: "DAU", value: "5.7M+", icon: TrendingUp },
     ],
   },
   {
@@ -22,8 +22,8 @@ const cases = [
     clientType: "Bible / platform",
     description: "Giving developers around the world access to our technology to build Bible apps. Build applications and integrate with the world's most popular Bible platform.",
     metrics: [
-      { label: "Bibles", value: "1,480", icon: Zap },
-      { label: "Publishers", value: "34", icon: Users },
+      { label: "Bibles", value: "1,480+", icon: Zap },
+      { label: "Publishers", value: "34+", icon: Users },
       { label: "Languages", value: "1,280+", icon: TrendingUp },
     ],
     platformUrl: "https://platform.youversion.com/bibles",
@@ -46,11 +46,8 @@ const CaseStudies = () => {
     <section id="work" className="pb-16 md:pb-20">
       <div className="container mx-auto px-6">
         <h3 className="text-3xl md:text-4xl font-bold mb-4">See the work</h3>
-        <p className="text-muted-foreground max-w-2xl mb-2">
-          How I’ve helped church leaders, faith tech teams, and Christian entrepreneurs ship products that scale—without losing the mission.
-        </p>
         <p className="text-muted-foreground max-w-2xl mb-10">
-          From YouVersion-scale platforms to national ministry roadmaps: strategy, product, and execution in your corner.
+          How I’ve helped church leaders, faith tech teams, and Christian entrepreneurs ship products that scale—without losing the mission. From YouVersion-scale platforms to national ministry roadmaps: strategy, product, and execution in your corner.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((caseStudy, index) => {
