@@ -1,12 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import logoBibleProject from "@/assets/logo-bibleProject-color.png";
-import logoBiblica from "@/assets/logo-biblica-color.png";
-import logoChurchApps from "@/assets/logo-churchApps-color.png";
-import logoFaithTech from "@/assets/logo-faithTech-color.png";
-import logoOneHope from "@/assets/logo-oneHope-color.png";
-import logoSaddleback from "@/assets/logo-saddleback-color.png";
-import logoTheChosen from "@/assets/logo-theChosen-color.png";
+import logoBiblica from "@/assets/logo-biblica.png";
+import logoTheChosen from "@/assets/logo-thechosen.jpg";
+import logoBibleProject from "@/assets/logo-bibleproject-wiki.png";
 import logoSermonshots from "@/assets/logo-sermonshots-new.png";
 import logoCovenant from "@/assets/logo-covenant-new.png";
 import logoResonate from "@/assets/logo-resonate-new.png";
@@ -15,15 +11,11 @@ import logoRestvo from "@/assets/logo-restvo.png";
 import logoLifechurch from "@/assets/logo-lifechurch-new.png";
 import logoBible from "@/assets/logo-bible.png";
 
-// Partner logos: YouVersion Platform partners + faithtech.dev banner logos
+// Partner logos: Biblica (getvectorlogo), The Chosen (Wikimedia), BibleProject (Wikipedia) + faithtech.dev banner
 const partnerLogos = [
-  { src: logoBibleProject, alt: "Bible Project" },
   { src: logoBiblica, alt: "Biblica" },
-  { src: logoChurchApps, alt: "Church Apps" },
-  { src: logoFaithTech, alt: "FaithTech" },
-  { src: logoOneHope, alt: "OneHope" },
-  { src: logoSaddleback, alt: "Saddleback Church" },
   { src: logoTheChosen, alt: "The Chosen" },
+  { src: logoBibleProject, alt: "Bible Project" },
   { src: logoSermonshots, alt: "Sermon Shots" },
   { src: logoCovenant, alt: "Evangelical Covenant Church" },
   { src: logoResonate, alt: "Resonate" },
