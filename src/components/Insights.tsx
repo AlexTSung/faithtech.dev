@@ -22,9 +22,9 @@ const insightCards = [
     title: "Rapid iteration and Insights",
     description: "Discovery, iteration, and KPIs that measure what really matters.",
     metrics: [
-      { label: "Cycle time", value: "-40%", icon: Zap },
-      { label: "KPI alignment", value: "100%", icon: TrendingUp },
-      { label: "Data-driven decisions", value: "3x", icon: Users },
+      { label: "Robust UXR (User Research Strategy)", value: "100+ UXR projects", icon: Users },
+      { label: "Hypothesis & A/B Testing", value: "1000+ Hours", icon: Zap },
+      { label: "Successful MVP Products & Features Launched", value: "55+ and counting", icon: TrendingUp },
     ],
   },
   {

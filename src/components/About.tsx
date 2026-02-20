@@ -12,8 +12,8 @@ const aboutCards = [
     description: "Worked with over 20K+ churches globally—campus ministries like InterVarsity (IV), CRU, and others; denominations including Evangelical Covenant Church (ECC), Southern Baptist Convention (SBC), and more.",
     metrics: [
       { label: "Churches served globally", value: "20K+", icon: Users },
-      { label: "Campus ministries (IV, CRU, etc.)", value: "—", icon: Zap },
-      { label: "Denominations (ECC, SBC, others)", value: "—", icon: TrendingUp },
+      { label: "Campus ministries (IV, CRU, etc.)", value: "10+", icon: Zap },
+      { label: "Denominations (ECC, SBC, others)", value: "20+", icon: TrendingUp },
     ],
   },
   {
@@ -33,9 +33,9 @@ const aboutCards = [
     title: "Team Building & Org Design",
     description: "Team building, processes, and org design for ministry teams—roadmaps and vendor selection that reach the next generation.",
     metrics: [
-      { label: "Reach (Gen Z)", value: "+40%", icon: Users },
-      { label: "Time to launch", value: "-50%", icon: Zap },
-      { label: "Stakeholder alignment", value: "100%", icon: TrendingUp },
+      { label: "Managed Squads", value: "5+", icon: Users },
+      { label: "Partners Served", value: "30K+", icon: Zap },
+      { label: "Product Team", value: "20+ PM + Designers", icon: TrendingUp },
     ],
   },
 ];
