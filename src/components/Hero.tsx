@@ -124,7 +124,13 @@ const Hero = () => {
         <div className="relative">
           <div className="flex gap-12 items-center animate-[scroll-left_40s_linear_infinite]">
             {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, i) => (
-              <img key={i} src={logo.src} alt={logo.alt} className="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity brightness-110" />
+              <div key={i} className="flex h-14 w-28 flex-shrink-0 items-center justify-center">
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="max-h-14 max-w-[7rem] w-auto object-contain opacity-90 hover:opacity-100 transition-opacity brightness-110"
+                />
+              </div>
             ))}
           </div>
         </div>

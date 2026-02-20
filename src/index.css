@@ -74,6 +74,11 @@ All colors MUST be HSL.
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
   }
+
+  /* Offset scroll targets so sticky header doesn’t cover section headings */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 @layer utilities {
