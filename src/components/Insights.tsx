@@ -44,8 +44,11 @@ const Insights = () => (
   <section id="insights" className="pb-16 md:pb-20">
     <div className="container mx-auto px-6">
       <h3 className="text-3xl md:text-4xl font-bold mb-4">Actionable Insights</h3>
-      <p className="text-muted-foreground mb-10">
+      <p className="text-muted-foreground max-w-2xl mb-4">
         The most effective digital ministries don't just collect data—they act on it. I help church and faith tech leaders turn analytics into actionable next steps so your mission moves forward with clarity and purpose.
+      </p>
+      <p className="text-muted-foreground max-w-2xl mb-10">
+        I've turned the largest repository of Bible data in the world into actionable insights for over 30K partners—helping ministries, publishers, and churches make decisions that drive engagement and impact.
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {insightCards.map((card, index) => {
