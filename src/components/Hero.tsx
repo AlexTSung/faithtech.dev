@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import logoBibleProject from "@/assets/logo-bibleProject.png";
-import logoBiblica from "@/assets/logo-biblica.png";
-import logoChurchApps from "@/assets/logo-churchApps.png";
-import logoFaithTech from "@/assets/logo-faithTech.png";
-import logoOneHope from "@/assets/logo-oneHope.png";
-import logoSaddleback from "@/assets/logo-saddleback.png";
-import logoTheChosen from "@/assets/logo-theChosen.png";
+import logoBibleProject from "@/assets/logo-bibleProject-color.png";
+import logoBiblica from "@/assets/logo-biblica-color.png";
+import logoChurchApps from "@/assets/logo-churchApps-color.png";
+import logoFaithTech from "@/assets/logo-faithTech-color.png";
+import logoOneHope from "@/assets/logo-oneHope-color.png";
+import logoSaddleback from "@/assets/logo-saddleback-color.png";
+import logoTheChosen from "@/assets/logo-theChosen-color.png";
 import logoSermonshots from "@/assets/logo-sermonshots-new.png";
 import logoCovenant from "@/assets/logo-covenant-new.png";
 import logoResonate from "@/assets/logo-resonate-new.png";
@@ -68,20 +68,20 @@ const Hero = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Card className="p-5 hover-rise">
-                <div className="text-3xl font-extrabold mb-1">300M+</div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-2xl font-extrabold mb-1">300M+</div>
+                <div className="text-sm text-muted-foreground">
                   users served across products led
                 </div>
               </Card>
               <Card className="p-5 hover-rise">
-                <div className="text-3xl font-extrabold mb-1">100+</div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-2xl font-extrabold mb-1">100+</div>
+                <div className="text-sm text-muted-foreground">
                   partnerships with Bible societies & ministries
                 </div>
               </Card>
               <Card className="p-5 hover-rise">
-                <div className="text-3xl font-extrabold mb-1">10x</div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-2xl font-extrabold mb-1">10x</div>
+                <div className="text-sm text-muted-foreground">
                   impact through strategy & product excellence
                 </div>
               </Card>

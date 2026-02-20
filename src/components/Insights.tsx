@@ -6,11 +6,11 @@ const insights = [{
   description: "Where personalization meets spiritual formation—without compromising trust."
 }, {
   icon: Users,
-  title: "What Churches Can Learn from Product Teams",
+  title: "Rapid iteration and Insights",
   description: "Discovery, iteration, and KPIs that measure what really matters."
 }, {
   icon: Compass,
-  title: "Build Tech That Scales Without Losing Your Soul",
+  title: "Build Tech for Your Local Community",
   description: "Operational excellence and ethics as first-class features."
 }];
 const Insights = () => {
