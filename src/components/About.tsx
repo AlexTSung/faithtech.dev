@@ -35,7 +35,7 @@ const aboutCards = [
     metrics: [
       { label: "Managed Squads", value: "5+", icon: Users },
       { label: "Partners Served", value: "30K+", icon: Zap },
-      { label: "Product Team", value: "20+ PM + Designers", icon: TrendingUp },
+      { label: "Product Team", value: "20+", icon: TrendingUp },
     ],
   },
 ];
