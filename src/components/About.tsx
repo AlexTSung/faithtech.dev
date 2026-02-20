@@ -1,20 +1,23 @@
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { TrendingUp, Users, Zap } from "lucide-react";
+import aboutChurchEngagement from "@/assets/about-church-engagement.png";
+import aboutPartnerships from "@/assets/about-partnerships-platform.png";
+import aboutTeamOrg from "@/assets/about-team-org.png";
 
 const aboutCards = [
   {
-    clientType: "Bible / digital ministry",
-    title: "Global Scripture Engagement",
-    description: "Scaled products serving hundreds of millions of users through habit formation, community, and content personalization.",
+    image: aboutChurchEngagement,
+    clientType: "Churches & denominations",
+    title: "Global Church Engagement",
+    description: "Worked with over 20K+ churches globally—campus ministries like InterVarsity (IV), CRU, and others; denominations including Evangelical Covenant Church (ECC), Southern Baptist Convention (SBC), and more.",
     metrics: [
-      { label: "Engagement lift", value: "+24%", icon: TrendingUp },
-      { label: "Monthly active users", value: "50M+", icon: Users },
-      { label: "Retention (D30)", value: "2.1x", icon: Zap },
+      { label: "Churches served globally", value: "20K+", icon: Users },
+      { label: "Campus ministries (IV, CRU, etc.)", value: "—", icon: Zap },
+      { label: "Denominations (ECC, SBC, others)", value: "—", icon: TrendingUp },
     ],
-    impactPercent: 85,
   },
   {
+    image: aboutPartnerships,
     clientType: "Bible society / publisher",
     title: "Partnerships & Platform",
     description: "100+ partnerships with Bible societies and ministries—APIs, licensing, and collaboration models that scale.",
@@ -23,9 +26,9 @@ const aboutCards = [
       { label: "API uptime", value: "99.9%", icon: Zap },
       { label: "New licensing models", value: "3x", icon: TrendingUp },
     ],
-    impactPercent: 90,
   },
   {
+    image: aboutTeamOrg,
     clientType: "Denomination / church network",
     title: "Team Building & Org Design",
     description: "Team building, processes, and org design for ministry teams—roadmaps and vendor selection that reach the next generation.",
@@ -34,7 +37,6 @@ const aboutCards = [
       { label: "Time to launch", value: "-50%", icon: Zap },
       { label: "Stakeholder alignment", value: "100%", icon: TrendingUp },
     ],
-    impactPercent: 78,
   },
 ];
 
@@ -50,9 +52,15 @@ const About = () => (
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {aboutCards.map((card, index) => {
-          const { metrics, impactPercent } = card;
+          const { metrics } = card;
           return (
-            <Card key={index} className="p-6 hover-rise flex flex-col">
+            <Card key={index} className="overflow-hidden hover-rise flex flex-col">
+              <img
+                src={card.image}
+                alt=""
+                className="w-full h-44 object-cover bg-muted"
+              />
+              <div className="p-6 flex-1 flex flex-col">
               <span className="text-xs font-medium text-primary uppercase tracking-wider">
                 {card.clientType}
               </span>
@@ -60,7 +68,7 @@ const About = () => (
               <p className="text-muted-foreground text-sm mb-4 flex-1">
                 {card.description}
               </p>
-              <div className="space-y-3 mb-4">
+              <div className="space-y-3">
                 {metrics.map((m, i) => {
                   const Icon = m.icon;
                   return (
@@ -72,12 +80,6 @@ const About = () => (
                   );
                 })}
               </div>
-              <div>
-                <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                  <span>Impact</span>
-                  <span className="font-semibold text-foreground">{impactPercent}%</span>
-                </div>
-                <Progress value={impactPercent} className="h-2 bg-muted" />
               </div>
             </Card>
           );

@@ -1,20 +1,23 @@
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { TrendingUp, Users, Zap } from "lucide-react";
+import insightAiBible from "@/assets/insight-ai-bible.png";
+import insightIteration from "@/assets/insight-iteration.png";
+import insightLocal from "@/assets/insight-local-ministry.png";
 
 const insightCards = [
   {
+    image: insightAiBible,
     clientType: "AI & personalization",
     title: "AI and the Future of Bible Engagement",
     description: "Where personalization meets spiritual formation—without compromising trust.",
     metrics: [
       { label: "Personalization lift", value: "+35%", icon: TrendingUp },
-      { label: "Trust score", value: "94%", icon: Users },
+      { label: "Trust score", value: "99.999%", icon: Users },
       { label: "Daily engagement", value: "2.4x", icon: Zap },
     ],
-    impactPercent: 88,
   },
   {
+    image: insightIteration,
     clientType: "Product & data",
     title: "Rapid iteration and Insights",
     description: "Discovery, iteration, and KPIs that measure what really matters.",
@@ -23,9 +26,9 @@ const insightCards = [
       { label: "KPI alignment", value: "100%", icon: TrendingUp },
       { label: "Data-driven decisions", value: "3x", icon: Users },
     ],
-    impactPercent: 82,
   },
   {
+    image: insightLocal,
     clientType: "Local ministry",
     title: "Build Tech for Your Local Community",
     description: "Operational excellence and ethics as first-class features.",
@@ -34,7 +37,6 @@ const insightCards = [
       { label: "Launch velocity", value: "2x", icon: Zap },
       { label: "Ethics compliance", value: "100%", icon: TrendingUp },
     ],
-    impactPercent: 85,
   },
 ];
 
@@ -47,9 +49,15 @@ const Insights = () => (
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {insightCards.map((card, index) => {
-          const { metrics, impactPercent } = card;
+          const { metrics } = card;
           return (
-            <Card key={index} className="p-6 hover-rise flex flex-col">
+            <Card key={index} className="overflow-hidden hover-rise flex flex-col">
+              <img
+                src={card.image}
+                alt=""
+                className="w-full h-44 object-cover bg-muted"
+              />
+              <div className="p-6 flex-1 flex flex-col">
               <span className="text-xs font-medium text-primary uppercase tracking-wider">
                 {card.clientType}
               </span>
@@ -57,7 +65,7 @@ const Insights = () => (
               <p className="text-muted-foreground text-sm mb-4 flex-1">
                 {card.description}
               </p>
-              <div className="space-y-3 mb-4">
+              <div className="space-y-3">
                 {metrics.map((m, i) => {
                   const Icon = m.icon;
                   return (
@@ -69,12 +77,6 @@ const Insights = () => (
                   );
                 })}
               </div>
-              <div>
-                <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                  <span>Impact</span>
-                  <span className="font-semibold text-foreground">{impactPercent}%</span>
-                </div>
-                <Progress value={impactPercent} className="h-2 bg-muted" />
               </div>
             </Card>
           );

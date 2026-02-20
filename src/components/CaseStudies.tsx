@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { TrendingUp, Users, Zap } from "lucide-react";
 import caseEngagement from "@/assets/case-engagement.png";
 import casePlatform from "@/assets/case-platform.png";
@@ -16,7 +15,6 @@ const cases = [
       { label: "Monthly active users", value: "50M+", icon: Users },
       { label: "Retention (D30)", value: "2.1x", icon: Zap },
     ],
-    impactPercent: 85,
   },
   {
     image: casePlatform,
@@ -28,7 +26,6 @@ const cases = [
       { label: "New partners onboarded", value: "3x", icon: Users },
       { label: "Uptime", value: "99.9%", icon: TrendingUp },
     ],
-    impactPercent: 90,
   },
   {
     image: caseTransformation,
@@ -40,7 +37,6 @@ const cases = [
       { label: "Time to launch", value: "-50%", icon: Zap },
       { label: "Stakeholder alignment", value: "100%", icon: TrendingUp },
     ],
-    impactPercent: 78,
   },
 ];
 
@@ -57,7 +53,7 @@ const CaseStudies = () => {
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((caseStudy, index) => {
-            const { metrics, impactPercent } = caseStudy;
+            const { metrics } = caseStudy;
             return (
               <Card key={index} className="overflow-hidden hover-rise flex flex-col">
                 <img
@@ -73,7 +69,7 @@ const CaseStudies = () => {
                   <p className="text-muted-foreground text-sm mb-4 flex-1">
                     {caseStudy.description}
                   </p>
-                  <div className="space-y-3 mb-4">
+                  <div className="space-y-3">
                     {metrics.map((m, i) => {
                       const Icon = m.icon;
                       return (
@@ -84,13 +80,6 @@ const CaseStudies = () => {
                         </div>
                       );
                     })}
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                      <span>Impact</span>
-                      <span className="font-semibold text-foreground">{impactPercent}%</span>
-                    </div>
-                    <Progress value={impactPercent} className="h-2 bg-muted" />
                   </div>
                 </div>
               </Card>
