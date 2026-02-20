@@ -11,31 +11,32 @@ const cases = [
     clientType: "Bible / digital ministry",
     description: "Drove double-digit growth with habit formation, community, and content personalization.",
     metrics: [
-      { label: "Engagement lift", value: "+24%", icon: TrendingUp },
-      { label: "Monthly active users", value: "50M+", icon: Users },
-      { label: "Retention (D30)", value: "2.1x", icon: Zap },
+      { label: "Installs", value: "109M+", icon: Zap },
+      { label: "MAU (L28)", value: "53.5M", icon: Users },
+      { label: "DAU", value: "5.7M", icon: TrendingUp },
     ],
   },
   {
     image: casePlatform,
-    title: "API Modernization for Bible Publisher",
-    clientType: "Bible society / publisher",
-    description: "Reduced latency and unlocked new licensing models with a secure, scalable API layer.",
+    title: "YouVersion Platform",
+    clientType: "Bible / platform",
+    description: "Giving developers around the world access to our technology to build Bible apps. Build applications and integrate with the world's most popular Bible platform.",
     metrics: [
-      { label: "Latency", value: "-60%", icon: Zap },
-      { label: "New partners onboarded", value: "3x", icon: Users },
-      { label: "Uptime", value: "99.9%", icon: TrendingUp },
+      { label: "Bibles", value: "1,480", icon: Zap },
+      { label: "Publishers", value: "34", icon: Users },
+      { label: "Languages", value: "1,280+", icon: TrendingUp },
     ],
+    platformUrl: "https://platform.youversion.com/bibles",
   },
   {
     image: caseTransformation,
-    title: "Digital Strategy for National Ministry",
+    title: "Connecting Bible App users to Churches",
     clientType: "Denomination / church network",
-    description: "Roadmap, org design, and vendor selection to reach Gen Z across channels.",
+    description: "Bridging digital Bible engagement with local church community and growth.",
     metrics: [
-      { label: "Reach (Gen Z)", value: "+40%", icon: Users },
-      { label: "Time to launch", value: "-50%", icon: Zap },
-      { label: "Stakeholder alignment", value: "100%", icon: TrendingUp },
+      { label: "Churches", value: "20K+", icon: Users },
+      { label: "Countries", value: "150+", icon: Zap },
+      { label: "Growth of churches", value: "215+%", icon: TrendingUp },
     ],
   },
 ];
@@ -69,6 +70,16 @@ const CaseStudies = () => {
                   <p className="text-muted-foreground text-sm mb-4 flex-1">
                     {caseStudy.description}
                   </p>
+                  {"platformUrl" in caseStudy && caseStudy.platformUrl && (
+                    <a
+                      href={caseStudy.platformUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline mb-4 inline-block"
+                    >
+                      platform.youversion.com/bibles →
+                    </a>
+                  )}
                   <div className="space-y-3">
                     {metrics.map((m, i) => {
                       const Icon = m.icon;
