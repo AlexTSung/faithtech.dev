@@ -19,7 +19,7 @@ const insightCards = [
   {
     image: insightIteration,
     clientType: "Product & data",
-    title: "Rapid iteration and Insights",
+    title: "Rapid Iteration, Insights, and UXR",
     description: "Discovery, iteration, and KPIs that measure what really matters.",
     metrics: [
       { label: "UXR Projects", value: "75+", icon: Users },

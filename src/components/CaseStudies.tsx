@@ -40,7 +40,7 @@ const cases = [
   },
   {
     image: caseTransformation,
-    title: "Connecting Bible App users to Churches",
+    title: "Connecting Bible Users to Churches",
     clientType: "Denomination / church network",
     description: "Bridging digital Bible engagement with local church community and growth.",
     demoUrl: "https://www.youversion.com/churches",
@@ -132,7 +132,11 @@ const CaseStudies = () => {
           {demoState?.embedBlocked ? (
             <div className="px-6 pb-6 space-y-4">
               <p className="text-muted-foreground text-sm">
-                This site doesn’t allow embedding, but you can open it in a new tab to explore the demo.
+                {demoState?.title === "Global Scripture Engagement"
+                  ? "Please click button below and see the impact on Global Scripture Engagement with YouVersion"
+                  : demoState?.title === "Connecting Bible Users to Churches"
+                    ? "Please click the button below and witness the impact of connecting Bible users to local churches."
+                    : `Please click the button below and open a new tab to see the impact on ${demoState?.title ?? "this work"}.`}
               </p>
               {demoState?.url && (
                 <a
