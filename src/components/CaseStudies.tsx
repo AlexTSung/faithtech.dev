@@ -18,6 +18,7 @@ const cases = [
     clientType: "Bible / digital ministry",
     description: "Drove double-digit growth with habit formation, community, and content personalization.",
     demoUrl: "https://www.youversion.com/bible-app",
+    embedBlocked: true,
     metrics: [
       { label: "Installs", value: "109M+", icon: Zap },
       { label: "MAU (L28)", value: "53.5M+", icon: Users },
@@ -43,6 +44,7 @@ const cases = [
     clientType: "Denomination / church network",
     description: "Bridging digital Bible engagement with local church community and growth.",
     demoUrl: "https://www.youversion.com/churches",
+    embedBlocked: true,
     metrics: [
       { label: "Churches", value: "20K+", icon: Users },
       { label: "Countries", value: "150+", icon: Zap },
@@ -52,7 +54,7 @@ const cases = [
 ];
 
 const CaseStudies = () => {
-  const [demoState, setDemoState] = useState<{ url: string; title: string } | null>(null);
+  const [demoState, setDemoState] = useState<{ url: string; title: string; embedBlocked?: boolean } | null>(null);
 
   return (
     <section id="work" className="pb-16 md:pb-20">
@@ -71,8 +73,8 @@ const CaseStudies = () => {
                 className={`overflow-hidden hover-rise flex flex-col ${hasDemo ? "cursor-pointer" : ""}`}
                 role={hasDemo ? "button" : undefined}
                 tabIndex={hasDemo ? 0 : undefined}
-                onClick={hasDemo ? () => setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title }) : undefined}
-                onKeyDown={hasDemo ? (e) => e.key === "Enter" && setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title }) : undefined}
+                onClick={hasDemo ? () => setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title, embedBlocked: !!(caseStudy as { embedBlocked?: boolean }).embedBlocked }) : undefined}
+                onKeyDown={hasDemo ? (e) => e.key === "Enter" && setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title, embedBlocked: !!(caseStudy as { embedBlocked?: boolean }).embedBlocked }) : undefined}
               >
                 <img
                   src={caseStudy.image}
@@ -123,32 +125,50 @@ const CaseStudies = () => {
       </div>
 
       <Dialog open={!!demoState} onOpenChange={(open) => !open && setDemoState(null)}>
-        <DialogContent className="max-w-6xl w-[95vw] h-[85vh] flex flex-col gap-0 p-0 overflow-hidden">
+        <DialogContent className={demoState?.embedBlocked ? "max-w-md" : "max-w-6xl w-[95vw] h-[85vh] flex flex-col gap-0 p-0 overflow-hidden"}>
           <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
             <DialogTitle>{demoState?.title ?? "Case study"}</DialogTitle>
           </DialogHeader>
-          <div className="flex-1 min-h-0 flex flex-col px-6 pb-6">
-            <iframe
-              title={demoState?.title ?? "Case study demo"}
-              src={demoState?.url ?? ""}
-              className="w-full flex-1 min-h-[400px] rounded-md border bg-muted"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-            />
-            <p className="text-xs text-muted-foreground mt-2">
-              Browsing within the site. If the demo doesn’t load, the linked site may block embedding.{" "}
+          {demoState?.embedBlocked ? (
+            <div className="px-6 pb-6 space-y-4">
+              <p className="text-muted-foreground text-sm">
+                This site doesn’t allow embedding, but you can open it in a new tab to explore the demo.
+              </p>
               {demoState?.url && (
                 <a
                   href={demoState.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
                   Open in new tab →
                 </a>
               )}
-            </p>
-          </div>
+            </div>
+          ) : (
+            <div className="flex-1 min-h-0 flex flex-col px-6 pb-6">
+              <iframe
+                title={demoState?.title ?? "Case study demo"}
+                src={demoState?.url ?? ""}
+                className="w-full flex-1 min-h-[400px] rounded-md border bg-muted"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Browsing within the site.{" "}
+                {demoState?.url && (
+                  <a
+                    href={demoState.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Open in new tab →
+                  </a>
+                )}
+              </p>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </section>
