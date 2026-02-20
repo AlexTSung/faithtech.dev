@@ -53,7 +53,7 @@ const Hero = () => {
               <span className="text-gradient">Faith & Technology</span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
-              For church leaders, faith tech teams, and Christian entrepreneurs: I help you turn mission into product—strategy, UX, and engineering leadership from a former Head of Product at YouVersion.
+              Hey, my name is Alex Sung! I am a product leader with 10+ years in tech development and product management. Currently, I am the Head of Product at YouVersion and love the mission of bringing God's word to everyone, everywhere, every day. I am also a husband, father, and pastor with over 15+ years serving in church & non-profit ministry.
             </p>
             <div className="flex flex-wrap gap-4 mb-8">
               <Button
