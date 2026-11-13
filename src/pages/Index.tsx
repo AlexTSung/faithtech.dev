@@ -6,7 +6,6 @@ import * as z from "zod";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -25,10 +24,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { TrendingUp, Users, Zap } from "lucide-react";
+import {
+  TrendingUp,
+  Users,
+  Zap,
+  Search,
+  Target,
+  Wrench,
+  LineChart,
+  type LucideIcon,
+} from "lucide-react";
 import caseEngagement from "@/assets/case-engagement.png";
 import casePlatform from "@/assets/case-platform.png";
 import caseTransformation from "@/assets/case-transformation.png";
+import heroVisual from "@/assets/hero-illustration.jpg";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -43,32 +52,41 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 const FORMSPREE_FORM_ID = import.meta.env.VITE_FORMSPREE_FORM_ID as string | undefined;
 
-const processSteps = [
+const processSteps: { icon: LucideIcon; name: string; desc: string }[] = [
   {
-    icon: "🔍",
+    icon: Search,
     name: "Discover",
     desc: "Interview real users. Map the real problem. Define what success actually looks like.",
   },
   {
-    icon: "🎯",
+    icon: Target,
     name: "Define",
     desc: "Scope the Minimum Lovable Product. Build the roadmap. Align the team.",
   },
   {
-    icon: "🛠️",
+    icon: Wrench,
     name: "Build",
     desc: "Ship in structured phases. Weekly reviews. Bias toward launch.",
   },
   {
-    icon: "📈",
+    icon: LineChart,
     name: "Grow",
     desc: "PLG loops, A/B tests, and iteration driven by real user data.",
   },
 ];
 
-const services = [
+const services: {
+  icon: LucideIcon;
+  title: string;
+  tagline: string;
+  description: string;
+  includes: string[];
+  cta: string;
+  href: string;
+  popular: boolean;
+}[] = [
   {
-    icon: "🔍",
+    icon: Search,
     title: "Strategy & Discovery",
     tagline: "Validate before you build.",
     description:
@@ -83,7 +101,7 @@ const services = [
     popular: false,
   },
   {
-    icon: "🛠️",
+    icon: Wrench,
     title: "Build & Launch",
     tagline: "0→1 product development.",
     description:
@@ -98,7 +116,7 @@ const services = [
     popular: true,
   },
   {
-    icon: "📈",
+    icon: LineChart,
     title: "Grow & Optimize",
     tagline: "Scale what's already working.",
     description:
@@ -285,26 +303,24 @@ const Index = () => {
       <Header />
       <main>
         {/* SECTION 1 — Hero */}
-        <section className="py-16 md:py-24 lg:py-28">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-12 items-center">
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(210_28%_92%)_0%,transparent_55%)] pointer-events-none" />
+          <div className="container mx-auto px-6 py-16 md:py-24 lg:py-28 relative">
+            <div className="grid lg:grid-cols-[1.05fr,0.95fr] gap-10 lg:gap-14 items-center">
               <div>
-                <span
-                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full border mb-6"
-                  style={{
-                    borderColor: "hsl(207 100% 62% / 0.3)",
-                    color: "hsl(207 100% 62%)",
-                    background: "hsl(207 100% 62% / 0.08)",
-                  }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  Church & Non-Profit Tech Consultant
-                </span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <svg className="w-10 h-10" aria-hidden="true">
+                    <use href="#ft-mark" />
+                  </svg>
+                  <span className="font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+                    FaithTech.dev
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-semibold leading-[1.12] mb-6">
                   The product consultant churches and ministries trust to{" "}
-                  <span style={{ color: "hsl(41 100% 70%)" }}>build what others can&apos;t.</span>
+                  <span className="text-ember">build what others can&apos;t.</span>
                 </h1>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 leading-relaxed">
                   10+ years shipping products that reach 300M+ people. I bring Silicon Valley
                   product rigor and 15+ years of pastoral experience to every engagement — so your
                   technology actually gets built, launched, and loved.
@@ -312,45 +328,58 @@ const Index = () => {
                 <div className="flex flex-wrap gap-4">
                   <Button
                     onClick={() => scrollToSection("contact")}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-6 py-6 text-base shadow-glow"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-6 py-6 text-base rounded-lg"
                   >
                     Book a Free Strategy Call
                   </Button>
                   <Button
                     onClick={() => scrollToSection("process")}
-                    variant="ghost"
-                    className="font-bold px-6 py-6 text-base"
+                    variant="outline"
+                    className="font-bold px-6 py-6 text-base rounded-lg border-foreground/20 text-foreground hover:bg-muted"
                   >
                     See How I Work →
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  Trusted by YouVersion, Biblica, Life.Church, The Chosen, Bible Project, and 20K+
-                  churches worldwide.
-                </p>
               </div>
 
-              <Card className="p-0 overflow-hidden border border-border">
-                <div className="flex flex-col divide-y divide-border">
-                  {heroStats.map((stat) => (
-                    <div key={stat.value} className="px-6 py-5 text-center">
-                      <div className="text-2xl font-extrabold mb-1">{stat.value}</div>
-                      <div className="text-sm text-muted-foreground">{stat.label}</div>
-                    </div>
-                  ))}
+              <div className="relative min-h-[280px] md:min-h-[400px] lg:min-h-[480px] -mx-6 lg:mx-0 lg:mr-[-2rem]">
+                <img
+                  src={heroVisual}
+                  alt="Open Bible with light — faith technology consulting for churches and ministries"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Proof strip — below fold (was hero stats card) */}
+        <section className="bg-band-ink text-secondary-foreground py-10 md:py-12 border-y border-border/20">
+          <div className="container mx-auto px-6">
+            <p className="text-xs uppercase tracking-widest text-secondary-foreground/55 mb-6 text-center">
+              Trusted by YouVersion, Biblica, Life.Church, The Chosen, Bible Project, and 20K+
+              churches worldwide.
+            </p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+              {heroStats.map((stat) => (
+                <div key={stat.value} className="text-center">
+                  <div className="text-2xl md:text-3xl font-display font-semibold text-primary mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-secondary-foreground/70">{stat.label}</div>
                 </div>
-              </Card>
+              ))}
             </div>
           </div>
         </section>
 
         {/* SECTION 2 — Problem Statement */}
-        <section className="py-16 md:py-20 bg-muted border-y border-border">
+        <section className="py-16 md:py-20 bg-muted">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-4 block">
+            <span className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 block">
               The Problem
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold leading-tight mb-6">
+            <h2 className="text-2xl sm:text-3xl font-semibold leading-tight mb-6">
               Most churches invest in technology before they know what to build.
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
@@ -367,29 +396,32 @@ const Index = () => {
         {/* SECTION 3 — Process */}
         <section id="process" className="py-16 md:py-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">A process that works.</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">A process that works.</h2>
             <p className="text-muted-foreground max-w-2xl mb-10">
               Every engagement follows the same disciplined arc — from unclear vision to shipped
               product.
             </p>
             <div className="flex flex-col lg:flex-row lg:items-stretch gap-4">
-              {processSteps.map((step, index) => (
-                <div key={step.name} className="contents">
-                  <div className="rounded-lg border bg-card p-5 flex flex-col gap-3 flex-1">
-                    <span className="text-2xl">{step.icon}</span>
-                    <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                      Step {index + 1}
-                    </span>
-                    <h3 className="text-base font-semibold">{step.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                  </div>
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:flex items-center text-muted-foreground text-xl px-2">
-                      →
+              {processSteps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.name} className="contents">
+                    <div className="p-5 flex flex-col gap-3 flex-1 border-t-2 border-primary/40">
+                      <Icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
+                      <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+                        Step {index + 1}
+                      </span>
+                      <h3 className="text-base font-semibold font-display">{step.name}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
                     </div>
-                  )}
-                </div>
-              ))}
+                    {index < processSteps.length - 1 && (
+                      <div className="hidden lg:flex items-center text-muted-foreground/50 text-xl px-1">
+                        →
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -397,61 +429,60 @@ const Index = () => {
         {/* SECTION 4 — Services */}
         <section id="services" className="pb-16 md:pb-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Three ways to work together.</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Three ways to work together.</h2>
             <p className="text-muted-foreground max-w-2xl mb-10">
               Pick the engagement that fits where you are.
             </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {services.map((service) => (
-                <Card
-                  key={service.title}
-                  className={`relative p-6 flex flex-col gap-4 ${service.popular ? "pt-8" : ""}`}
-                >
-                  {service.popular && (
-                    <span
-                      className="text-xs font-bold uppercase tracking-widest px-2 py-1 rounded-full absolute -top-3 left-1/2 -translate-x-1/2"
-                      style={{
-                        background: "hsl(41 100% 70%)",
-                        color: "hsl(222 52% 8%)",
-                      }}
-                    >
-                      Most Popular
-                    </span>
-                  )}
-                  <span className="text-2xl">{service.icon}</span>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">{service.title}</h3>
-                    <p className="text-sm font-medium text-primary">{service.tagline}</p>
+            <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+              {services.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <div
+                    key={service.title}
+                    className={`relative flex flex-col gap-4 pt-2 ${
+                      service.popular ? "md:pt-6" : ""
+                    }`}
+                  >
+                    {service.popular && (
+                      <span className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 absolute -top-1 left-0 bg-secondary text-secondary-foreground rounded-md">
+                        Most Popular
+                      </span>
+                    )}
+                    <Icon className="h-7 w-7 text-foreground mt-4" strokeWidth={1.75} aria-hidden />
+                    <div>
+                      <h3 className="text-xl font-semibold font-display mb-1">{service.title}</h3>
+                      <p className="text-sm font-medium text-accent">{service.tagline}</p>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {service.description}
+                    </p>
+                    <ul className="space-y-2 text-sm text-muted-foreground flex-1">
+                      {service.includes.map((item) => (
+                        <li key={item} className="flex gap-2">
+                          <span className="text-primary shrink-0">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {service.href.startsWith("#") ? (
+                      <button
+                        type="button"
+                        onClick={() => scrollToSection(service.href.slice(1))}
+                        className="text-sm font-medium text-accent hover:text-primary hover:underline text-left"
+                      >
+                        {service.cta}
+                      </button>
+                    ) : (
+                      <Link
+                        to={service.href}
+                        className="text-sm font-medium text-accent hover:text-primary hover:underline"
+                      >
+                        {service.cta}
+                      </Link>
+                    )}
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground flex-1">
-                    {service.includes.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="text-primary shrink-0">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {service.href.startsWith("#") ? (
-                    <button
-                      type="button"
-                      onClick={() => scrollToSection(service.href.slice(1))}
-                      className="text-sm font-medium text-primary hover:underline text-left"
-                    >
-                      {service.cta}
-                    </button>
-                  ) : (
-                    <Link
-                      to={service.href}
-                      className="text-sm font-medium text-primary hover:underline"
-                    >
-                      {service.cta}
-                    </Link>
-                  )}
-                </Card>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -459,7 +490,7 @@ const Index = () => {
         {/* SECTION 5 — Why Alex comparison */}
         <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Why not just hire a freelancer? Or an agency?
             </h2>
             <p className="text-muted-foreground max-w-2xl mb-10">
@@ -474,10 +505,7 @@ const Index = () => {
                     <th className="text-left p-4 font-semibold text-muted-foreground w-[22%]">
                       &nbsp;
                     </th>
-                    <th
-                      className="text-left p-4 font-semibold text-primary-foreground"
-                      style={{ background: "hsl(207 100% 62%)" }}
-                    >
+                    <th className="text-left p-4 font-semibold bg-secondary text-secondary-foreground">
                       With Alex
                     </th>
                     <th className="text-left p-4 font-semibold bg-card">A Freelancer</th>
@@ -514,14 +542,11 @@ const Index = () => {
             {/* Mobile stacked cards */}
             <div className="md:hidden space-y-4">
               {comparisonRows.map((row) => (
-                <Card key={row.label} className="p-5 space-y-3">
-                  <h3 className="font-semibold text-foreground">{row.label}</h3>
+                <div key={row.label} className="p-5 space-y-3 border-t border-border">
+                  <h3 className="font-semibold text-foreground font-display">{row.label}</h3>
                   <div className="space-y-2 text-sm">
-                    <div
-                      className="rounded-md p-3"
-                      style={{ background: "hsl(207 100% 62% / 0.15)" }}
-                    >
-                      <span className="font-semibold text-primary block mb-1">With Alex</span>
+                    <div className="rounded-md p-3 bg-primary/10">
+                      <span className="font-semibold text-foreground block mb-1">With Alex</span>
                       <span>
                         {row.alex.mark} {row.alex.text}
                       </span>
@@ -539,7 +564,7 @@ const Index = () => {
                       {row.ai.mark} {row.ai.text}
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -548,30 +573,32 @@ const Index = () => {
         {/* SECTION 6 — See the Work */}
         <section id="work" className="pb-16 md:pb-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See the work</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">See the work</h2>
             <p className="text-muted-foreground max-w-2xl mb-10">
               If you lead a church, ministry, or faith tech team — these case studies show exactly
               what&apos;s possible. Real products. Real users. Real outcomes.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cases.map((caseStudy) => (
-                <Card key={caseStudy.title} className="overflow-hidden hover-rise flex flex-col">
+                <article key={caseStudy.title} className="flex flex-col hover-rise">
                   <img
                     src={caseStudy.image}
                     alt={`${caseStudy.title} — church technology and faith tech case study`}
                     className="w-full h-44 object-cover bg-muted"
                   />
-                  <div className="p-6 flex-1 flex flex-col">
-                    <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                  <div className="pt-5 flex-1 flex flex-col">
+                    <span className="text-xs font-medium text-accent uppercase tracking-wider">
                       {caseStudy.clientType}
                     </span>
-                    <h3 className="text-xl font-bold mt-2 mb-3">{caseStudy.title}</h3>
+                    <h3 className="text-xl font-semibold font-display mt-2 mb-3">
+                      {caseStudy.title}
+                    </h3>
                     <p className="text-muted-foreground text-sm mb-4 flex-1">
                       {caseStudy.description}
                     </p>
                     <Link
                       to="/portfolio"
-                      className="text-sm text-primary font-medium mb-4 inline-block hover:underline"
+                      className="text-sm text-accent font-medium mb-4 inline-block hover:text-primary hover:underline"
                     >
                       View case study →
                     </Link>
@@ -588,7 +615,7 @@ const Index = () => {
                       })}
                     </div>
                   </div>
-                </Card>
+                </article>
               ))}
             </div>
           </div>
@@ -597,17 +624,14 @@ const Index = () => {
         {/* SECTION 7 — Testimonials */}
         <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10">What partners say.</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-10">What partners say.</h2>
+            <div className="grid md:grid-cols-2 gap-8">
               {testimonials.map((t, i) => (
-                <div
-                  key={i}
-                  className="rounded-lg border bg-card p-6 flex flex-col gap-4"
-                >
-                  <div className="text-primary text-2xl">&quot;</div>
+                <div key={i} className="border-t-2 border-primary/30 pt-6 flex flex-col gap-4">
+                  <div className="text-primary text-2xl font-display">&quot;</div>
                   <p className="text-foreground leading-relaxed italic">{t.quote}</p>
                   <div className="border-t border-border pt-4 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-primary font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-accent font-bold text-sm">
                       {t.initials}
                     </div>
                     <div>
@@ -621,10 +645,29 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SECTION 8 — CTA + Contact */}
-        <section id="contact" className="pb-16 md:pb-20">
+        {/* Ember CTA band — full-bleed before contact */}
+        <section className="bg-band-ember py-14 md:py-16">
+          <div className="container mx-auto px-6 text-center max-w-3xl">
+            <h2 className="text-2xl md:text-3xl font-semibold font-display text-primary-foreground mb-4">
+              Ready to build what lasts?
+            </h2>
+            <p className="text-primary-foreground/85 mb-8 text-lg">
+              Most clients start with a free 30-minute strategy call — clarity on what to build,
+              whether we work together or not.
+            </p>
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-8 py-6 text-base rounded-lg"
+            >
+              Book a Free Strategy Call
+            </Button>
+          </div>
+        </section>
+
+        {/* SECTION 8 — Contact */}
+        <section id="contact" className="py-16 md:py-20">
           <div className="container mx-auto px-6 max-w-3xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Let&apos;s build something that lasts.
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
@@ -632,7 +675,7 @@ const Index = () => {
               what to build, in what order, and why — whether we work together or not.
             </p>
 
-            <div className="w-full rounded-lg border border-border overflow-hidden mb-8">
+            <div className="w-full rounded-lg border border-border overflow-hidden mb-8 bg-card">
               <iframe
                 src="https://calendly.com/alex-sung-youversion/30min?embed_type=Inline&hide_landing_page_details=1"
                 width="100%"
@@ -665,7 +708,7 @@ const Index = () => {
                       <FormControl>
                         <Input
                           placeholder="Your name"
-                          className="bg-transparent border-border"
+                          className="bg-card border-border"
                           {...field}
                         />
                       </FormControl>
@@ -683,7 +726,7 @@ const Index = () => {
                       <FormControl>
                         <Input
                           placeholder="Church, ministry, publisher…"
-                          className="bg-transparent border-border"
+                          className="bg-card border-border"
                           {...field}
                         />
                       </FormControl>
@@ -702,7 +745,7 @@ const Index = () => {
                         <Input
                           type="email"
                           placeholder="you@example.org"
-                          className="bg-transparent border-border"
+                          className="bg-card border-border"
                           {...field}
                         />
                       </FormControl>
@@ -719,7 +762,7 @@ const Index = () => {
                       <FormLabel className="text-xs text-muted-foreground">Project Type</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-transparent border-border">
+                          <SelectTrigger className="bg-card border-border">
                             <SelectValue />
                           </SelectTrigger>
                         </FormControl>
@@ -744,7 +787,7 @@ const Index = () => {
                       <FormLabel className="text-xs text-muted-foreground">Timeline</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-transparent border-border">
+                          <SelectTrigger className="bg-card border-border">
                             <SelectValue />
                           </SelectTrigger>
                         </FormControl>
@@ -771,7 +814,7 @@ const Index = () => {
                       <FormControl>
                         <Textarea
                           placeholder="Tell me about outcomes, audience, and any constraints."
-                          className="bg-transparent border-border min-h-[120px]"
+                          className="bg-card border-border min-h-[120px]"
                           {...field}
                         />
                       </FormControl>
@@ -784,7 +827,7 @@ const Index = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-lg"
                   >
                     {isSubmitting ? "Sending…" : "Send"}
                   </Button>

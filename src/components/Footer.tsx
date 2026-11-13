@@ -9,23 +9,30 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-border py-12 md:py-16">
+    <footer className="bg-band-ink text-secondary-foreground py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div className="space-y-2">
-          <p className="font-bold text-foreground text-lg">FaithTech.dev</p>
-          <p className="text-sm text-muted-foreground">
+          <div className="flex items-center gap-3 mb-2">
+            <svg className="w-8 h-8" aria-hidden="true">
+              <use href="#ft-mark" />
+            </svg>
+            <p className="font-bold text-secondary-foreground text-lg font-display">
+              FaithTech.dev
+            </p>
+          </div>
+          <p className="text-sm text-secondary-foreground/70">
             Church & Non-Profit Tech Consulting
           </p>
-          <p className="text-sm text-muted-foreground">© 2026 FaithTech.dev</p>
+          <p className="text-sm text-secondary-foreground/55">© 2026 FaithTech.dev</p>
         </div>
 
         {/* Navigate */}
         <div className="space-y-3">
-          <p className="font-semibold text-foreground text-sm uppercase tracking-wider">
+          <p className="font-semibold text-secondary-foreground text-sm uppercase tracking-wider">
             Navigate
           </p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <ul className="space-y-2 text-sm text-secondary-foreground/70">
             <li>
               <a
                 href="#process"
@@ -77,10 +84,10 @@ const Footer = () => {
 
         {/* Connect */}
         <div className="space-y-3">
-          <p className="font-semibold text-foreground text-sm uppercase tracking-wider">
+          <p className="font-semibold text-secondary-foreground text-sm uppercase tracking-wider">
             Connect
           </p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <ul className="space-y-2 text-sm text-secondary-foreground/70">
             <li>
               <a
                 href="https://www.linkedin.com/in/alextimsung"
@@ -108,7 +115,7 @@ const Footer = () => {
                 }}
                 className="inline-flex items-center font-medium text-primary hover:underline"
               >
-                Book a Strategy Call
+                Book a Free Strategy Call
               </a>
             </li>
           </ul>

@@ -97,7 +97,12 @@ export default {
         "fade-in": "fade-in 0.3s ease-out",
       },
       boxShadow: {
-        'glow': '0 6px 16px rgba(58,160,255,.35)',
+        glow: "none",
+        soft: "0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06)",
+      },
+      fontFamily: {
+        sans: ['"DM Sans"', "system-ui", "-apple-system", '"Segoe UI"', "sans-serif"],
+        display: ['"Fraunces"', "Georgia", '"Times New Roman"', "serif"],
       },
     },
   },
