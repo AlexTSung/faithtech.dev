@@ -634,7 +634,7 @@ const Index = () => {
 
             <div className="w-full rounded-lg border border-border overflow-hidden mb-8">
               <iframe
-                src="https://calendly.com/alexsung/strategy-call?embed_type=Inline&hide_landing_page_details=1"
+                src="https://calendly.com/alex-sung-youversion/30min?embed_type=Inline&hide_landing_page_details=1"
                 width="100%"
                 height="650"
                 frameBorder="0"
