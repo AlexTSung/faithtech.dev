@@ -32,6 +32,10 @@ import {
   Target,
   Wrench,
   LineChart,
+  Check,
+  Minus,
+  X,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 import caseEngagement from "@/assets/case-engagement.png";
@@ -76,48 +80,56 @@ const processSteps: { icon: LucideIcon; name: string; desc: string }[] = [
 ];
 
 const services: {
+  num: string;
   icon: LucideIcon;
   title: string;
+  forWhom: string;
   tagline: string;
   description: string;
   includes: string[];
   cta: string;
   href: string;
-  popular: boolean;
+  featured: boolean;
 }[] = [
   {
+    num: "01",
     icon: Search,
     title: "Strategy & Discovery",
+    forWhom: "Before you hire builders",
     tagline: "Validate before you build.",
     description:
-      "Deep UXR research, customer journey mapping, MLP scoping, and a validated product roadmap — before a dollar goes to development.",
+      "Deep UXR research, customer journey mapping, MLP scoping, and a validated product roadmap, before a dollar goes to development.",
     includes: [
       "Discovery Sprint (14 days)",
       "UXR interviews + synthesis",
       "Prioritized roadmap + PLG strategy",
     ],
-    cta: "Learn about the Discovery Sprint →",
+    cta: "Learn about the Discovery Sprint",
     href: "/discovery-sprint",
-    popular: false,
+    featured: false,
   },
   {
+    num: "02",
     icon: Wrench,
     title: "Build & Launch",
-    tagline: "0→1 product development.",
+    forWhom: "Ready to ship 0→1",
+    tagline: "From validated concept to live product.",
     description:
-      "From validated concept to shipped product. I lead the full build: architecture decisions, design, agile development, and launch.",
+      "I lead the full build: architecture decisions, design, agile development, and launch. One point of contact from roadmap to release.",
     includes: [
       "Full 0→1 product leadership",
       "MLP design + prototype",
       "Launch strategy + go-to-market",
     ],
-    cta: "See the work →",
+    cta: "See the work",
     href: "/portfolio",
-    popular: true,
+    featured: true,
   },
   {
+    num: "03",
     icon: LineChart,
     title: "Grow & Optimize",
+    forWhom: "Already live, not growing",
     tagline: "Scale what's already working.",
     description:
       "Product-led growth strategy, AI personalization, platform partnerships, and ongoing product advisory for teams that have launched.",
@@ -126,49 +138,63 @@ const services: {
       "AI and personalization strategy",
       "Embedded advisory retainer",
     ],
-    cta: "Book a call →",
+    cta: "Book a call",
     href: "#contact",
-    popular: false,
+    featured: false,
   },
 ];
 
-const comparisonRows = [
+type Mark = "yes" | "partial" | "no";
+
+const comparisonRows: {
+  label: string;
+  alex: { mark: Mark; text: string };
+  freelancer: { mark: Mark; text: string };
+  agency: { mark: Mark; text: string };
+  ai: { mark: Mark; text: string };
+}[] = [
   {
     label: "Ministry experience",
-    alex: { mark: "✅", text: "15+ years in church & non-profit ministry" },
-    freelancer: { mark: "➖", text: "Rarely" },
-    agency: { mark: "➖", text: "Unlikely" },
-    ai: { mark: "❌", text: "None" },
+    alex: { mark: "yes", text: "15+ years in church & non-profit ministry" },
+    freelancer: { mark: "partial", text: "Rarely" },
+    agency: { mark: "partial", text: "Unlikely" },
+    ai: { mark: "no", text: "None" },
   },
   {
     label: "Product leadership depth",
-    alex: { mark: "✅", text: "10+ years, 300M+ users" },
-    freelancer: { mark: "➖", text: "One discipline only" },
-    agency: { mark: "➖", text: "Team, not practitioner" },
-    ai: { mark: "❌", text: "None" },
+    alex: { mark: "yes", text: "10+ years, 300M+ users" },
+    freelancer: { mark: "partial", text: "One discipline only" },
+    agency: { mark: "partial", text: "Team, not practitioner" },
+    ai: { mark: "no", text: "None" },
   },
   {
     label: "Single point of contact",
-    alex: { mark: "✅", text: "Always" },
-    freelancer: { mark: "✅", text: "Yes" },
-    agency: { mark: "❌", text: "Account manager layer" },
-    ai: { mark: "❌", text: "No relationship" },
+    alex: { mark: "yes", text: "Always" },
+    freelancer: { mark: "yes", text: "Yes" },
+    agency: { mark: "no", text: "Account manager layer" },
+    ai: { mark: "no", text: "No relationship" },
   },
   {
     label: "Validated before build",
-    alex: { mark: "✅", text: "UXR-first always" },
-    freelancer: { mark: "❌", text: "Usually skipped" },
-    agency: { mark: "➖", text: "Expensive add-on" },
-    ai: { mark: "❌", text: "No" },
+    alex: { mark: "yes", text: "UXR-first always" },
+    freelancer: { mark: "no", text: "Usually skipped" },
+    agency: { mark: "partial", text: "Expensive add-on" },
+    ai: { mark: "no", text: "No" },
   },
   {
     label: "Mission alignment",
-    alex: { mark: "✅", text: "Central to every decision" },
-    freelancer: { mark: "➖", text: "Depends on the person" },
-    agency: { mark: "➖", text: "Often secondary" },
-    ai: { mark: "❌", text: "No" },
+    alex: { mark: "yes", text: "Central to every decision" },
+    freelancer: { mark: "partial", text: "Depends on the person" },
+    agency: { mark: "partial", text: "Often secondary" },
+    ai: { mark: "no", text: "No" },
   },
 ];
+
+const MarkIcon = ({ mark }: { mark: Mark }) => {
+  if (mark === "yes") return <Check className="h-4 w-4 text-success shrink-0" strokeWidth={2.25} aria-hidden />;
+  if (mark === "partial") return <Minus className="h-4 w-4 text-muted-foreground shrink-0" strokeWidth={2.25} aria-hidden />;
+  return <X className="h-4 w-4 text-muted-foreground/70 shrink-0" strokeWidth={2.25} aria-hidden />;
+};
 
 const heroStats = [
   { value: "300M+", label: "users served across products led" },
@@ -219,14 +245,14 @@ const cases = [
 const testimonials = [
   {
     quote:
-      "[PLACEHOLDER — Add a quote from a church leader or ministry partner about working with Alex. 2–3 sentences about outcome.]",
+      "[PLACEHOLDER: Add a quote from a church leader or ministry partner about working with Alex. Two or three sentences about outcome.]",
     name: "[Name]",
     role: "[Title, Organization]",
     initials: "??",
   },
   {
     quote:
-      "[PLACEHOLDER — Add a quote from a faith tech team or founder. Focus on the product strategy or launch outcome.]",
+      "[PLACEHOLDER: Add a quote from a faith tech team or founder. Focus on the product strategy or launch outcome.]",
     name: "[Name]",
     role: "[Title, Organization]",
     initials: "??",
@@ -302,50 +328,45 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <main>
-        {/* SECTION 1 — Hero */}
-        <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(210_28%_92%)_0%,transparent_55%)] pointer-events-none" />
-          <div className="container mx-auto px-6 py-16 md:py-24 lg:py-28 relative">
-            <div className="grid lg:grid-cols-[1.05fr,0.95fr] gap-10 lg:gap-14 items-center">
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <svg className="w-10 h-10" aria-hidden="true">
-                    <use href="#ft-mark" />
-                  </svg>
-                  <span className="font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground">
-                    FaithTech.dev
-                  </span>
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-semibold leading-[1.12] mb-6">
+        {/* Hero */}
+        <section className="pt-14 pb-10 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
+          <div className="container mx-auto px-6">
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-end">
+              <div className="lg:col-span-6 xl:col-span-5">
+                <p className="font-display text-sm font-medium tracking-wide text-accent mb-5">
+                  FaithTech.dev
+                </p>
+                <h1 className="text-[2.35rem] sm:text-5xl lg:text-[3.35rem] font-semibold mb-6 max-w-[18ch]">
                   The product consultant churches and ministries trust to{" "}
                   <span className="text-ember">build what others can&apos;t.</span>
                 </h1>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 leading-relaxed">
-                  10+ years shipping products that reach 300M+ people. I bring Silicon Valley
-                  product rigor and 15+ years of pastoral experience to every engagement — so your
-                  technology actually gets built, launched, and loved.
+                <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 leading-relaxed">
+                  10+ years shipping products that reach 300M+ people. Silicon Valley product rigor
+                  and 15+ years of pastoral experience, so your technology actually gets built,
+                  launched, and loved.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                   <Button
                     onClick={() => scrollToSection("contact")}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-6 py-6 text-base rounded-lg"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-5 py-6 text-[0.95rem] rounded-md"
                   >
                     Book a Free Strategy Call
                   </Button>
-                  <Button
-                    onClick={() => scrollToSection("process")}
-                    variant="outline"
-                    className="font-bold px-6 py-6 text-base rounded-lg border-foreground/20 text-foreground hover:bg-muted"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("services")}
+                    className="text-sm font-medium text-foreground/80 hover:text-accent inline-flex items-center gap-1.5 group"
                   >
-                    See How I Work →
-                  </Button>
+                    See how we work
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </button>
                 </div>
               </div>
 
-              <div className="relative min-h-[280px] md:min-h-[400px] lg:min-h-[480px] -mx-6 lg:mx-0 lg:mr-[-2rem]">
+              <div className="lg:col-span-6 xl:col-span-7 relative h-[260px] sm:h-[340px] lg:h-[420px] xl:h-[460px]">
                 <img
                   src={heroVisual}
-                  alt="Open Bible with light — faith technology consulting for churches and ministries"
+                  alt="Open Bible with light: faith technology consulting for churches and ministries"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -353,185 +374,226 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Proof strip — below fold (was hero stats card) */}
-        <section className="bg-band-ink text-secondary-foreground py-10 md:py-12 border-y border-border/20">
+        {/* Proof strip below fold */}
+        <section className="bg-band-ink text-secondary-foreground py-9 md:py-11">
           <div className="container mx-auto px-6">
-            <p className="text-xs uppercase tracking-widest text-secondary-foreground/55 mb-6 text-center">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-secondary-foreground/50 mb-7 max-w-3xl">
               Trusted by YouVersion, Biblica, Life.Church, The Chosen, Bible Project, and 20K+
               churches worldwide.
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-              {heroStats.map((stat) => (
-                <div key={stat.value} className="text-center">
-                  <div className="text-2xl md:text-3xl font-display font-semibold text-primary mb-1">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+              {heroStats.map((stat, i) => (
+                <div key={stat.value} className={i === 0 ? "lg:pr-4" : i === 3 ? "lg:pl-2" : ""}>
+                  <div className="text-2xl md:text-[1.75rem] font-display font-semibold text-primary mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-secondary-foreground/70">{stat.label}</div>
+                  <div className="text-sm text-secondary-foreground/65 max-w-[16ch]">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* SECTION 2 — Problem Statement */}
-        <section className="py-16 md:py-20 bg-muted">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <span className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 block">
-              The Problem
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-semibold leading-tight mb-6">
-              Most churches invest in technology before they know what to build.
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-              They hire developers before validating ideas. They choose platforms before
-              understanding their own workflows. They launch products their people never adopt —
-              and wonder why the mission didn&apos;t scale.
-            </p>
-            <p className="text-foreground font-semibold text-lg">
-              That&apos;s the gap I close — before it costs you.
-            </p>
+        {/* Problem */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-6">
+            <div className="max-w-2xl md:ml-[8%] lg:ml-[12%]">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-4">
+                The Problem
+              </p>
+              <h2 className="text-2xl sm:text-3xl md:text-[2.15rem] font-semibold leading-tight mb-6">
+                Most churches invest in technology before they know what to build.
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                They hire developers before validating ideas. They choose platforms before
+                understanding their own workflows. They launch products their people never adopt,
+                and wonder why the mission didn&apos;t scale.
+              </p>
+              <p className="text-foreground font-semibold text-lg font-display">
+                That&apos;s the gap I close, before it costs you.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* SECTION 3 — Process */}
-        <section id="process" className="py-16 md:py-20">
+        {/* Process: editorial numbered list, not equal cards */}
+        <section id="process" className="pb-16 md:pb-24 border-t border-border/80 pt-16 md:pt-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">A process that works.</h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">
-              Every engagement follows the same disciplined arc — from unclear vision to shipped
-              product.
-            </p>
-            <div className="flex flex-col lg:flex-row lg:items-stretch gap-4">
+            <div className="md:flex md:items-end md:justify-between md:gap-12 mb-12">
+              <div className="max-w-xl">
+                <h2 className="text-3xl md:text-4xl font-semibold mb-3">A process that works.</h2>
+                <p className="text-muted-foreground">
+                  Every engagement follows the same disciplined arc: from unclear vision to shipped
+                  product.
+                </p>
+              </div>
+            </div>
+            <ol className="space-y-0 divide-y divide-border">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <div key={step.name} className="contents">
-                    <div className="p-5 flex flex-col gap-3 flex-1 border-t-2 border-primary/40">
-                      <Icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
-                      <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-                        Step {index + 1}
+                  <li
+                    key={step.name}
+                    className="grid grid-cols-[auto_1fr] sm:grid-cols-[3rem_10rem_1fr] gap-x-4 gap-y-2 py-6 md:py-7 first:pt-0"
+                  >
+                    <span className="font-display text-sm text-muted-foreground/80 pt-1 tabular-nums">
+                      0{index + 1}
+                    </span>
+                    <div className="flex items-center gap-2.5 sm:contents">
+                      <span className="sm:hidden">
+                        <Icon className="h-5 w-5 text-foreground" strokeWidth={1.75} aria-hidden />
                       </span>
-                      <h3 className="text-base font-semibold font-display">{step.name}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                      <h3 className="font-display text-lg font-semibold flex items-center gap-2.5">
+                        <Icon className="hidden sm:inline h-5 w-5 text-foreground" strokeWidth={1.75} aria-hidden />
+                        {step.name}
+                      </h3>
                     </div>
-                    {index < processSteps.length - 1 && (
-                      <div className="hidden lg:flex items-center text-muted-foreground/50 text-xl px-1">
-                        →
-                      </div>
-                    )}
-                  </div>
+                    <p className="col-start-2 sm:col-start-3 text-muted-foreground text-[0.95rem] leading-relaxed max-w-xl">
+                      {step.desc}
+                    </p>
+                  </li>
                 );
               })}
-            </div>
+            </ol>
           </div>
         </section>
 
-        {/* SECTION 4 — Services */}
-        <section id="services" className="pb-16 md:pb-20">
+        {/* Services: editorial stack with one featured lane */}
+        <section id="services" className="pb-20 md:pb-28">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Three ways to work together.</h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">
-              Pick the engagement that fits where you are.
-            </p>
-            <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+            <div className="max-w-xl mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-semibold mb-3">Three ways to work together.</h2>
+              <p className="text-muted-foreground">
+                Pick the engagement that fits where you are. Most partners start with a free
+                strategy call to decide.
+              </p>
+            </div>
+
+            <div className="space-y-0">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <div
+                  <article
                     key={service.title}
-                    className={`relative flex flex-col gap-4 pt-2 ${
-                      service.popular ? "md:pt-6" : ""
+                    className={`grid md:grid-cols-12 gap-4 md:gap-8 py-10 md:py-12 border-t border-border ${
+                      service.featured ? "bg-muted/60 -mx-6 px-6 md:mx-0 md:px-8 md:rounded-lg border-t-0 md:my-2" : ""
                     }`}
                   >
-                    {service.popular && (
-                      <span className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 absolute -top-1 left-0 bg-secondary text-secondary-foreground rounded-md">
-                        Most Popular
+                    <div className="md:col-span-2 flex md:flex-col gap-3 md:gap-2 items-baseline md:items-start">
+                      <span className="font-display text-sm text-muted-foreground tabular-nums">
+                        {service.num}
                       </span>
-                    )}
-                    <Icon className="h-7 w-7 text-foreground mt-4" strokeWidth={1.75} aria-hidden />
-                    <div>
-                      <h3 className="text-xl font-semibold font-display mb-1">{service.title}</h3>
-                      <p className="text-sm font-medium text-accent">{service.tagline}</p>
+                      <Icon className="h-5 w-5 text-foreground md:mt-2" strokeWidth={1.75} aria-hidden />
                     </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {service.description}
-                    </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground flex-1">
-                      {service.includes.map((item) => (
-                        <li key={item} className="flex gap-2">
-                          <span className="text-primary shrink-0">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    {service.href.startsWith("#") ? (
-                      <button
-                        type="button"
-                        onClick={() => scrollToSection(service.href.slice(1))}
-                        className="text-sm font-medium text-accent hover:text-primary hover:underline text-left"
-                      >
-                        {service.cta}
-                      </button>
-                    ) : (
-                      <Link
-                        to={service.href}
-                        className="text-sm font-medium text-accent hover:text-primary hover:underline"
-                      >
-                        {service.cta}
-                      </Link>
-                    )}
-                  </div>
+                    <div className="md:col-span-4">
+                      <p className="text-xs font-medium uppercase tracking-[0.12em] text-accent mb-2">
+                        {service.forWhom}
+                      </p>
+                      <h3 className="text-2xl font-semibold font-display mb-2">{service.title}</h3>
+                      <p className="text-foreground/80 font-medium">{service.tagline}</p>
+                    </div>
+                    <div className="md:col-span-6 flex flex-col gap-5">
+                      <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                      <ul className="space-y-2 text-sm text-foreground/80">
+                        {service.includes.map((item) => (
+                          <li key={item} className="flex gap-2.5">
+                            <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" strokeWidth={2.25} aria-hidden />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {service.href.startsWith("#") ? (
+                        <button
+                          type="button"
+                          onClick={() => scrollToSection(service.href.slice(1))}
+                          className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 hover:text-accent self-start group"
+                        >
+                          {service.cta}
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                        </button>
+                      ) : (
+                        <Link
+                          to={service.href}
+                          className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 hover:text-accent self-start group"
+                        >
+                          {service.cta}
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                        </Link>
+                      )}
+                    </div>
+                  </article>
                 );
               })}
+              <div className="border-t border-border" />
+            </div>
+
+            <div className="mt-10 md:mt-12 flex flex-wrap items-center gap-4">
+              <Button
+                onClick={() => scrollToSection("contact")}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-md px-5 py-6"
+              >
+                Book a Free Strategy Call
+              </Button>
+              <p className="text-sm text-muted-foreground max-w-sm">
+                Not sure which engagement fits? Start with the call. You&apos;ll leave with a clear
+                next step either way.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5 — Why Alex comparison */}
-        <section className="pb-16 md:pb-20">
+        {/* Why Alex */}
+        <section className="pb-20 md:pb-28">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-3 max-w-2xl">
               Why not just hire a freelancer? Or an agency?
             </h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">
+            <p className="text-muted-foreground max-w-xl mb-10">
               Here&apos;s how the options compare.
             </p>
 
-            {/* Desktop table */}
-            <div className="hidden md:block overflow-x-auto rounded-lg border border-border">
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left p-4 font-semibold text-muted-foreground w-[22%]">
+                  <tr className="border-b-2 border-foreground/15">
+                    <th className="text-left py-4 pr-4 font-medium text-muted-foreground w-[22%]">
                       &nbsp;
                     </th>
-                    <th className="text-left p-4 font-semibold bg-secondary text-secondary-foreground">
+                    <th className="text-left py-4 px-4 font-display font-semibold bg-secondary text-secondary-foreground">
                       With Alex
                     </th>
-                    <th className="text-left p-4 font-semibold bg-card">A Freelancer</th>
-                    <th className="text-left p-4 font-semibold bg-card">An Agency</th>
-                    <th className="text-left p-4 font-semibold bg-card">AI Tools</th>
+                    <th className="text-left py-4 px-4 font-semibold text-foreground/80">A Freelancer</th>
+                    <th className="text-left py-4 px-4 font-semibold text-foreground/80">An Agency</th>
+                    <th className="text-left py-4 px-4 font-semibold text-foreground/80">AI Tools</th>
                   </tr>
                 </thead>
                 <tbody>
                   {comparisonRows.map((row) => (
-                    <tr key={row.label} className="border-b border-border last:border-0">
-                      <td className="p-4 font-medium text-foreground">{row.label}</td>
-                      <td className="p-4 bg-primary/10">
-                        <span className="mr-1.5">{row.alex.mark}</span>
-                        {row.alex.text}
+                    <tr key={row.label} className="border-b border-border">
+                      <td className="py-4 pr-4 font-medium text-foreground">{row.label}</td>
+                      <td className="py-4 px-4 bg-primary/10">
+                        <span className="inline-flex items-start gap-2">
+                          <MarkIcon mark={row.alex.mark} />
+                          <span>{row.alex.text}</span>
+                        </span>
                       </td>
-                      <td className="p-4 text-muted-foreground">
-                        <span className="mr-1.5">{row.freelancer.mark}</span>
-                        {row.freelancer.text}
+                      <td className="py-4 px-4 text-muted-foreground">
+                        <span className="inline-flex items-start gap-2">
+                          <MarkIcon mark={row.freelancer.mark} />
+                          <span>{row.freelancer.text}</span>
+                        </span>
                       </td>
-                      <td className="p-4 text-muted-foreground">
-                        <span className="mr-1.5">{row.agency.mark}</span>
-                        {row.agency.text}
+                      <td className="py-4 px-4 text-muted-foreground">
+                        <span className="inline-flex items-start gap-2">
+                          <MarkIcon mark={row.agency.mark} />
+                          <span>{row.agency.text}</span>
+                        </span>
                       </td>
-                      <td className="p-4 text-muted-foreground">
-                        <span className="mr-1.5">{row.ai.mark}</span>
-                        {row.ai.text}
+                      <td className="py-4 px-4 text-muted-foreground">
+                        <span className="inline-flex items-start gap-2">
+                          <MarkIcon mark={row.ai.mark} />
+                          <span>{row.ai.text}</span>
+                        </span>
                       </td>
                     </tr>
                   ))}
@@ -539,30 +601,33 @@ const Index = () => {
               </table>
             </div>
 
-            {/* Mobile stacked cards */}
-            <div className="md:hidden space-y-4">
+            <div className="md:hidden space-y-8">
               {comparisonRows.map((row) => (
-                <div key={row.label} className="p-5 space-y-3 border-t border-border">
+                <div key={row.label} className="border-t border-border pt-5 space-y-3">
                   <h3 className="font-semibold text-foreground font-display">{row.label}</h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="rounded-md p-3 bg-primary/10">
-                      <span className="font-semibold text-foreground block mb-1">With Alex</span>
-                      <span>
-                        {row.alex.mark} {row.alex.text}
-                      </span>
+                  <div className="space-y-2.5 text-sm">
+                    <div className="flex gap-2 items-start bg-primary/10 p-3 rounded-md">
+                      <MarkIcon mark={row.alex.mark} />
+                      <div>
+                        <span className="font-semibold block mb-0.5">With Alex</span>
+                        {row.alex.text}
+                      </div>
                     </div>
-                    <div className="text-muted-foreground">
-                      <span className="font-medium text-foreground">A Freelancer: </span>
-                      {row.freelancer.mark} {row.freelancer.text}
-                    </div>
-                    <div className="text-muted-foreground">
-                      <span className="font-medium text-foreground">An Agency: </span>
-                      {row.agency.mark} {row.agency.text}
-                    </div>
-                    <div className="text-muted-foreground">
-                      <span className="font-medium text-foreground">AI Tools: </span>
-                      {row.ai.mark} {row.ai.text}
-                    </div>
+                    {(
+                      [
+                        ["A Freelancer", row.freelancer],
+                        ["An Agency", row.agency],
+                        ["AI Tools", row.ai],
+                      ] as const
+                    ).map(([label, cell]) => (
+                      <div key={label} className="flex gap-2 items-start text-muted-foreground px-1">
+                        <MarkIcon mark={cell.mark} />
+                        <div>
+                          <span className="font-medium text-foreground">{label}: </span>
+                          {cell.text}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -570,50 +635,52 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SECTION 6 — See the Work */}
-        <section id="work" className="pb-16 md:pb-20">
+        {/* Work */}
+        <section id="work" className="pb-20 md:pb-28">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">See the work</h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">
-              If you lead a church, ministry, or faith tech team — these case studies show exactly
-              what&apos;s possible. Real products. Real users. Real outcomes.
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {cases.map((caseStudy) => (
-                <article key={caseStudy.title} className="flex flex-col hover-rise">
+            <div className="md:flex md:items-end md:justify-between gap-8 mb-10 md:mb-12">
+              <div className="max-w-xl">
+                <h2 className="text-3xl md:text-4xl font-semibold mb-3">See the work</h2>
+                <p className="text-muted-foreground">
+                  If you lead a church, ministry, or faith tech team, these case studies show
+                  what&apos;s possible. Real products. Real users. Real outcomes.
+                </p>
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+              {cases.map((caseStudy, i) => (
+                <article
+                  key={caseStudy.title}
+                  className={`flex flex-col ${i === 1 ? "md:mt-8" : i === 2 ? "lg:mt-4" : ""}`}
+                >
                   <img
                     src={caseStudy.image}
-                    alt={`${caseStudy.title} — church technology and faith tech case study`}
-                    className="w-full h-44 object-cover bg-muted"
+                    alt={`${caseStudy.title}: church technology and faith tech case study`}
+                    className="w-full h-44 object-cover bg-muted mb-5"
                   />
-                  <div className="pt-5 flex-1 flex flex-col">
-                    <span className="text-xs font-medium text-accent uppercase tracking-wider">
-                      {caseStudy.clientType}
-                    </span>
-                    <h3 className="text-xl font-semibold font-display mt-2 mb-3">
-                      {caseStudy.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-4 flex-1">
-                      {caseStudy.description}
-                    </p>
-                    <Link
-                      to="/portfolio"
-                      className="text-sm text-accent font-medium mb-4 inline-block hover:text-primary hover:underline"
-                    >
-                      View case study →
-                    </Link>
-                    <div className="space-y-3">
-                      {caseStudy.metrics.map((m) => {
-                        const Icon = m.icon;
-                        return (
-                          <div key={m.label} className="flex items-center gap-2 text-sm">
-                            <Icon className="h-4 w-4 text-primary flex-shrink-0" />
-                            <span className="text-muted-foreground">{m.label}</span>
-                            <span className="font-bold text-foreground ml-auto">{m.value}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <span className="text-xs font-medium text-accent uppercase tracking-[0.12em]">
+                    {caseStudy.clientType}
+                  </span>
+                  <h3 className="text-xl font-semibold font-display mt-2 mb-3">{caseStudy.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4 flex-1">{caseStudy.description}</p>
+                  <Link
+                    to="/portfolio"
+                    className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group self-start"
+                  >
+                    View case study
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                  <div className="space-y-2.5 border-t border-border pt-4">
+                    {caseStudy.metrics.map((m) => {
+                      const Icon = m.icon;
+                      return (
+                        <div key={m.label} className="flex items-center gap-2 text-sm">
+                          <Icon className="h-4 w-4 text-primary flex-shrink-0" />
+                          <span className="text-muted-foreground">{m.label}</span>
+                          <span className="font-semibold text-foreground ml-auto">{m.value}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </article>
               ))}
@@ -621,61 +688,69 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SECTION 7 — Testimonials */}
+        {/* Testimonials */}
         <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-10">What partners say.</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-10 md:mb-14">What partners say.</h2>
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
               {testimonials.map((t, i) => (
-                <div key={i} className="border-t-2 border-primary/30 pt-6 flex flex-col gap-4">
-                  <div className="text-primary text-2xl font-display">&quot;</div>
-                  <p className="text-foreground leading-relaxed italic">{t.quote}</p>
-                  <div className="border-t border-border pt-4 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-accent font-bold text-sm">
+                <blockquote
+                  key={i}
+                  className={`flex flex-col gap-5 ${i === 1 ? "md:mt-10" : ""}`}
+                >
+                  <p className="text-foreground leading-relaxed text-lg font-display font-medium">
+                    {t.quote}
+                  </p>
+                  <footer className="flex items-center gap-3 pt-2">
+                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-accent font-semibold text-xs">
                       {t.initials}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                      <cite className="not-italic text-sm font-semibold text-foreground block">
+                        {t.name}
+                      </cite>
                       <p className="text-xs text-muted-foreground">{t.role}</p>
                     </div>
-                  </div>
-                </div>
+                  </footer>
+                </blockquote>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Ember CTA band — full-bleed before contact */}
-        <section className="bg-band-ember py-14 md:py-16">
-          <div className="container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="text-2xl md:text-3xl font-semibold font-display text-primary-foreground mb-4">
-              Ready to build what lasts?
-            </h2>
-            <p className="text-primary-foreground/85 mb-8 text-lg">
-              Most clients start with a free 30-minute strategy call — clarity on what to build,
-              whether we work together or not.
-            </p>
+        {/* One strong CTA moment */}
+        <section className="bg-band-ember py-16 md:py-20">
+          <div className="container mx-auto px-6 md:flex md:items-center md:justify-between md:gap-12 max-w-5xl">
+            <div className="mb-8 md:mb-0 max-w-xl">
+              <h2 className="text-2xl md:text-3xl font-semibold font-display text-primary-foreground mb-3">
+                Ready to build what lasts?
+              </h2>
+              <p className="text-primary-foreground/85 text-lg">
+                Most clients start with a free 30-minute strategy call. Clarity on what to build,
+                whether we work together or not.
+              </p>
+            </div>
             <Button
               onClick={() => scrollToSection("contact")}
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-8 py-6 text-base rounded-lg"
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-semibold px-7 py-6 text-base rounded-md shrink-0"
             >
               Book a Free Strategy Call
             </Button>
           </div>
         </section>
 
-        {/* SECTION 8 — Contact */}
-        <section id="contact" className="py-16 md:py-20">
+        {/* Contact */}
+        <section id="contact" className="py-16 md:py-24">
           <div className="container mx-auto px-6 max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Let&apos;s build something that lasts.
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
               Most clients start with a 30-minute strategy call. You&apos;ll leave with clarity on
-              what to build, in what order, and why — whether we work together or not.
+              what to build, in what order, and why, whether we work together or not.
             </p>
 
-            <div className="w-full rounded-lg border border-border overflow-hidden mb-8 bg-card">
+            <div className="w-full border border-border overflow-hidden mb-8 bg-card">
               <iframe
                 src="https://calendly.com/alex-sung-youversion/30min?embed_type=Inline&hide_landing_page_details=1"
                 width="100%"
@@ -688,7 +763,7 @@ const Index = () => {
             </div>
 
             <p className="text-sm text-muted-foreground text-center mb-6">
-              Prefer to write first? Fill out the form below and I&apos;ll reply within 1–2
+              Prefer to write first? Fill out the form below and I&apos;ll reply within 1-2
               business days.
             </p>
 
@@ -793,8 +868,8 @@ const Index = () => {
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="Exploring">Exploring</SelectItem>
-                          <SelectItem value="1-3 months">1–3 months</SelectItem>
-                          <SelectItem value="3-6 months">3–6 months</SelectItem>
+                          <SelectItem value="1-3 months">1-3 months</SelectItem>
+                          <SelectItem value="3-6 months">3-6 months</SelectItem>
                           <SelectItem value=">6 months">6+ months</SelectItem>
                         </SelectContent>
                       </Select>
@@ -827,12 +902,12 @@ const Index = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-lg"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-md"
                   >
                     {isSubmitting ? "Sending…" : "Send"}
                   </Button>
                   <small className="text-xs text-muted-foreground">
-                    I typically respond within 1–2 business days.
+                    I typically respond within 1-2 business days.
                   </small>
                 </div>
               </form>

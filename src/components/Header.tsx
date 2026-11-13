@@ -15,23 +15,22 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/90 border-b border-border">
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6 py-3.5">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <svg className="w-9 h-9" aria-hidden="true">
+          <div className="flex items-center gap-2.5">
+            <svg className="w-8 h-8" aria-hidden="true">
               <use href="#ft-mark" />
             </svg>
-            <span className="text-lg font-bold tracking-wide font-display text-foreground">
+            <span className="text-base font-semibold tracking-tight font-display text-foreground">
               FaithTech.dev
             </span>
           </div>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-6">
+          <ul className="hidden md:flex items-center gap-7">
             <li>
               <button
                 onClick={() => scrollToSection("services")}
-                className="text-foreground/80 hover:text-accent transition-colors font-sans-ui text-sm font-medium"
+                className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
                 Services
               </button>
@@ -39,7 +38,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("work")}
-                className="text-foreground/80 hover:text-accent transition-colors font-sans-ui text-sm font-medium"
+                className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
                 Work
               </button>
@@ -47,9 +46,9 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("process")}
-                className="text-foreground/80 hover:text-accent transition-colors font-sans-ui text-sm font-medium"
+                className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
-                About
+                Process
               </button>
             </li>
             <li>
@@ -62,14 +61,13 @@ const Header = () => {
                     }
                   ).openCalendly?.(e);
                 }}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-md text-sm"
               >
                 Book a Free Strategy Call
               </Button>
             </li>
           </ul>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -79,14 +77,13 @@ const Header = () => {
           </button>
         </nav>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-6 animate-fade-in">
+          <div className="md:hidden pt-4 pb-5 animate-fade-in">
             <ul className="flex flex-col gap-4">
               <li>
                 <button
                   onClick={() => scrollToSection("services")}
-                  className="text-foreground/80 hover:text-accent transition-colors w-full text-left"
+                  className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
                   Services
                 </button>
@@ -94,7 +91,7 @@ const Header = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("work")}
-                  className="text-foreground/80 hover:text-accent transition-colors w-full text-left"
+                  className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
                   Work
                 </button>
@@ -102,9 +99,9 @@ const Header = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("process")}
-                  className="text-foreground/80 hover:text-accent transition-colors w-full text-left"
+                  className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
-                  About
+                  Process
                 </button>
               </li>
               <li>
@@ -117,7 +114,7 @@ const Header = () => {
                       }
                     ).openCalendly?.(e);
                   }}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold w-full rounded-lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold w-full rounded-md"
                 >
                   Book a Free Strategy Call
                 </Button>
