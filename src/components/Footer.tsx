@@ -11,7 +11,7 @@ const Footer = () => {
       if (element) element.scrollIntoView({ behavior: "smooth" });
       return;
     }
-    navigate("/");
+    navigate(`/#${id}`);
     window.setTimeout(() => {
       const element = document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -42,54 +42,64 @@ const Footer = () => {
           </p>
           <ul className="space-y-2 text-sm text-secondary-foreground/70">
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("who-i-serve")}
+              <Link
+                to="/#who-i-serve"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("who-i-serve");
+                }}
                 className="hover:text-primary transition-colors"
               >
                 Who I serve
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => goToSection("process")}
-                className="hover:text-primary transition-colors"
-              >
-                Process
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => goToSection("services")}
-                className="hover:text-primary transition-colors"
-              >
-                Services
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => goToSection("work")}
-                className="hover:text-primary transition-colors"
-              >
-                Work
-              </button>
-            </li>
-            <li>
-              <Link to="/portfolio" className="hover:text-primary transition-colors">
-                Portfolio
               </Link>
             </li>
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("contact")}
+              <Link
+                to="/#process"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("process");
+                }}
+                className="hover:text-primary transition-colors"
+              >
+                Process
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/#services"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("services");
+                }}
+                className="hover:text-primary transition-colors"
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/#work"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("work");
+                }}
+                className="hover:text-primary transition-colors"
+              >
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("contact");
+                }}
                 className="hover:text-primary transition-colors"
               >
                 Contact
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -133,13 +143,16 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("contact")}
+              <Link
+                to="/#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("contact");
+                }}
                 className="inline-flex items-center font-medium text-primary hover:underline"
               >
                 Book a Free Strategy Call
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

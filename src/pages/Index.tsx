@@ -10,6 +10,7 @@ import PartnerLogosMarquee from "@/components/PartnerLogosMarquee";
 import SeoHead from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
 import { audienceList } from "@/data/audiences";
+import { HOME_KEYWORDS, homepageJsonLd } from "@/lib/seo-schema";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -108,8 +109,8 @@ const services: {
       "UXR interviews + synthesis",
       "Prioritized roadmap + PLG strategy",
     ],
-    cta: "Learn about the Discovery Sprint",
-    href: "/discovery-sprint",
+    cta: "Book a Discovery Sprint call",
+    href: "#contact",
     featured: false,
   },
   {
@@ -126,7 +127,7 @@ const services: {
       "Launch strategy + go-to-market",
     ],
     cta: "See the work",
-    href: "/portfolio",
+    href: "#work",
     featured: true,
   },
   {
@@ -317,6 +318,8 @@ const Index = () => {
         title="FaithTech.dev | Digital Strategy for Churches, Non-Profits & FaithTech"
         description="Personalized digital strategy and product consulting for churches and pastors, non-profit directors, and FaithTech leaders. Book a free strategy call."
         path="/"
+        keywords={HOME_KEYWORDS}
+        jsonLd={homepageJsonLd()}
       />
       <Header />
       <main>
@@ -460,8 +463,23 @@ const Index = () => {
                 understanding their own workflows. They launch products their people never adopt,
                 and wonder why the mission didn&apos;t scale.
               </p>
-              <p className="text-foreground font-semibold text-lg font-display">
+              <p className="text-foreground font-semibold text-lg font-display mb-4">
                 That&apos;s the gap I close, before it costs you.
+              </p>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                Explore{" "}
+                <Link to="/for-churches" className="text-foreground font-medium underline-offset-4 hover:underline hover:text-accent">
+                  church technology consulting for pastors
+                </Link>
+                ,{" "}
+                <Link to="/for-nonprofits" className="text-foreground font-medium underline-offset-4 hover:underline hover:text-accent">
+                  non-profit product consulting
+                </Link>
+                , or{" "}
+                <Link to="/for-faithtech" className="text-foreground font-medium underline-offset-4 hover:underline hover:text-accent">
+                  FaithTech product consulting
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -672,13 +690,14 @@ const Index = () => {
                   </span>
                   <h3 className="text-xl font-semibold font-display mt-2 mb-3">{caseStudy.title}</h3>
                   <p className="text-muted-foreground text-sm mb-4 flex-1">{caseStudy.description}</p>
-                  <Link
-                    to="/portfolio"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("contact")}
                     className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group self-start"
                   >
-                    View case study
+                    Discuss this work
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+                  </button>
                   <div className="space-y-2.5 border-t border-border pt-4">
                     {caseStudy.metrics.map((m) => {
                       const Icon = m.icon;

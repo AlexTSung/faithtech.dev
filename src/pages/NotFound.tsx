@@ -1,5 +1,6 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import SeoHead from "@/components/SeoHead";
 
 const NotFound = () => {
   const location = useLocation();
@@ -10,12 +11,18 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
+      <SeoHead
+        title="Page not found | FaithTech.dev"
+        description="This page does not exist. Return to FaithTech.dev for church, non-profit, and FaithTech consulting."
+        path={location.pathname}
+        noindex
+      />
       <div className="text-center">
         <h1 className="mb-4 text-4xl font-bold">404</h1>
         <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
+        <Link to="/" className="text-primary underline hover:text-primary/90">
           Return to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

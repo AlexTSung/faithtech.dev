@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FaithTech.dev | Digital Strategy for Churches, Non-Profits & FaithTech</title>
     <meta name="description" content="Personalized digital strategy and product consulting for churches and pastors, non-profit directors, and FaithTech leaders. Book a free strategy call." />
+    <meta name="keywords" content="church technology consultant, ministry product strategy, faith tech consultant, product consultant for churches, nonprofit product consultant, fractional CPO nonprofit, church digital transformation, ministry digital strategy, FaithTech product consulting" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#e8eef4" />
     
     <!-- Open Graph / Twitter -->
     <meta property="og:title" content="FaithTech.dev | Digital Strategy for Churches, Non-Profits & FaithTech" />
     <meta property="og:description" content="Personalized digital strategy for churches, non-profits, and FaithTech leaders. Product consulting with pastoral experience and Silicon Valley rigor." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://faithtech.dev/" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://www.faithtech.dev/" />
+    <meta property="og:image" content="https://www.faithtech.dev/og-image.jpg" />
+    <meta property="og:site_name" content="FaithTech.dev" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <link rel="canonical" href="https://faithtech.dev/" />
+    <meta name="twitter:title" content="FaithTech.dev | Digital Strategy for Churches, Non-Profits & FaithTech" />
+    <meta name="twitter:description" content="Personalized digital strategy for churches, non-profits, and FaithTech leaders." />
+    <meta name="twitter:image" content="https://www.faithtech.dev/og-image.jpg" />
+    <link rel="canonical" href="https://www.faithtech.dev/" />
 
     <!-- Favicon: Ink & Ember (steel F + ember accent) -->
     <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"%3E%3Crect width="256" height="256" rx="48" fill="%23141c2e"/%3E%3Cg transform="translate(38,38)"%3E%3Crect x="36" y="24" width="28" height="120" rx="8" fill="%233b6f99"/%3E%3Crect x="36" y="24" width="76" height="28" rx="8" fill="%233b6f99"/%3E%3Crect x="36" y="76" width="52" height="28" rx="8" fill="%233b6f99"/%3E%3Ccircle cx="128" cy="38" r="16" fill="%23e89a0c"/%3E%3C/g%3E%3C/svg%3E' />
@@ -26,15 +31,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- JSON-LD structured data -->
+    <!-- JSON-LD structured data (Person + ProfessionalService + Organization) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "FaithTech.dev",
-      "url": "https://faithtech.dev/",
-      "logo": "/favicon.svg",
-      "sameAs": []
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.faithtech.dev/#organization",
+          "name": "FaithTech.dev",
+          "url": "https://www.faithtech.dev/",
+          "logo": "https://www.faithtech.dev/favicon.svg",
+          "sameAs": ["https://www.linkedin.com/in/alextimsung"],
+          "founder": { "@id": "https://www.faithtech.dev/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.faithtech.dev/#person",
+          "name": "Alex Sung",
+          "url": "https://www.faithtech.dev/",
+          "jobTitle": "Head of Product, Partners at YouVersion; FaithTech product consultant",
+          "description": "Product leader and consultant helping churches, non-profits, and FaithTech teams with digital strategy and product leadership.",
+          "worksFor": { "@type": "Organization", "name": "YouVersion" },
+          "sameAs": ["https://www.linkedin.com/in/alextimsung"]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://www.faithtech.dev/#service",
+          "name": "FaithTech.dev Consulting",
+          "url": "https://www.faithtech.dev/",
+          "image": "https://www.faithtech.dev/og-image.jpg",
+          "description": "Personalized digital strategy and product consulting for churches and pastors, non-profit directors, and FaithTech leaders.",
+          "provider": { "@id": "https://www.faithtech.dev/#person" },
+          "areaServed": "Worldwide",
+          "serviceType": [
+            "Church technology consulting",
+            "Non-profit product consulting",
+            "FaithTech product consulting",
+            "Ministry digital strategy"
+          ]
+        }
+      ]
     }
     </script>
   </head>

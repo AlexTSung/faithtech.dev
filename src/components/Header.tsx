@@ -23,7 +23,7 @@ const Header = () => {
       if (element) element.scrollIntoView({ behavior: "smooth" });
       return;
     }
-    navigate("/");
+    navigate(`/#${id}`);
     window.setTimeout(() => {
       const element = document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/90 border-b border-border">
       <div className="container mx-auto px-6 py-3.5">
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between" aria-label="Primary">
           <Link to="/" className="flex items-center gap-2.5" onClick={() => setMobileMenuOpen(false)}>
             <svg className="w-8 h-8" aria-hidden="true">
               <use href="#ft-mark" />
@@ -50,13 +50,16 @@ const Header = () => {
 
           <ul className="hidden lg:flex items-center gap-5 xl:gap-6">
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("who-i-serve")}
+              <Link
+                to="/#who-i-serve"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("who-i-serve");
+                }}
                 className={linkClass}
               >
                 Who I serve
-              </button>
+              </Link>
             </li>
             {audienceList.map((a) => (
               <li key={a.id}>
@@ -70,27 +73,40 @@ const Header = () => {
               </li>
             ))}
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("process")}
+              <Link
+                to="/#process"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("process");
+                }}
                 className={linkClass}
               >
                 Process
-              </button>
+              </Link>
             </li>
             <li>
-              <button
-                type="button"
-                onClick={() => goToSection("services")}
+              <Link
+                to="/#services"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("services");
+                }}
                 className={linkClass}
               >
                 Services
-              </button>
+              </Link>
             </li>
             <li>
-              <button type="button" onClick={() => goToSection("work")} className={linkClass}>
+              <Link
+                to="/#work"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection("work");
+                }}
+                className={linkClass}
+              >
                 Work
-              </button>
+              </Link>
             </li>
             <li>
               <Button
@@ -122,19 +138,22 @@ const Header = () => {
           <div className="lg:hidden pt-4 pb-5 animate-fade-in">
             <ul className="flex flex-col gap-4">
               <li>
-                <button
-                  type="button"
-                  onClick={() => goToSection("who-i-serve")}
-                  className={mobileLinkClass}
+                <Link
+                  to="/#who-i-serve"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection("who-i-serve");
+                  }}
+                  className={`${mobileLinkClass} block`}
                 >
                   Who I serve
-                </button>
+                </Link>
               </li>
               {audienceList.map((a) => (
                 <li key={a.id}>
                   <Link
                     to={a.path}
-                    className={mobileLinkClass + " block"}
+                    className={`${mobileLinkClass} block`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {a.shortLabel}
@@ -145,13 +164,16 @@ const Header = () => {
                 .filter((s) => s.id !== "who-i-serve")
                 .map((s) => (
                   <li key={s.id}>
-                    <button
-                      type="button"
-                      onClick={() => goToSection(s.id)}
-                      className={mobileLinkClass}
+                    <Link
+                      to={`/#${s.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToSection(s.id);
+                      }}
+                      className={`${mobileLinkClass} block`}
                     >
                       {s.label}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               <li>
