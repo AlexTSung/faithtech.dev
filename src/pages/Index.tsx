@@ -5,7 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AudienceGateway from "@/components/AudienceGateway";
+import PartnerLogosMarquee from "@/components/PartnerLogosMarquee";
+import SeoHead from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
+import { audienceList } from "@/data/audiences";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -326,6 +330,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SeoHead
+        title="FaithTech.dev | Digital Strategy for Churches, Non-Profits & FaithTech"
+        description="Personalized digital strategy and product consulting for churches and pastors, non-profit directors, and FaithTech leaders. Book a free strategy call."
+        path="/"
+      />
       <Header />
       <main>
         {/* Hero */}
@@ -344,7 +353,7 @@ const Index = () => {
                   and 15+ years of pastoral experience, so your technology actually gets built,
                   launched, and loved.
                 </p>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-6">
                   <Button
                     onClick={() => scrollToSection("contact")}
                     className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-5 py-6 text-[0.95rem] rounded-md"
@@ -353,12 +362,30 @@ const Index = () => {
                   </Button>
                   <button
                     type="button"
-                    onClick={() => scrollToSection("services")}
+                    onClick={() => scrollToSection("who-i-serve")}
                     className="text-sm font-medium text-foreground/80 hover:text-accent inline-flex items-center gap-1.5 group"
                   >
-                    See how we work
+                    Who I serve
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </button>
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {audienceList.map((a) => (
+                    <Button
+                      key={a.id}
+                      asChild
+                      variant="outline"
+                      className="rounded-md border-border font-medium text-sm"
+                    >
+                      <Link to={a.path}>
+                        {a.id === "churches"
+                          ? "For churches"
+                          : a.id === "nonprofits"
+                            ? "For non-profits"
+                            : "For FaithTech"}
+                      </Link>
+                    </Button>
+                  ))}
                 </div>
               </div>
 
@@ -372,6 +399,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Trusted by partners: scrolling logo marquee (pre-rewrite Hero) */}
+        <PartnerLogosMarquee className="pb-10 md:pb-14" />
 
         {/* Proof strip below fold */}
         <section className="bg-band-ink text-secondary-foreground py-9 md:py-11">
@@ -392,6 +422,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Who I serve: gateway into audience pages */}
+        <AudienceGateway />
 
         {/* Problem */}
         <section className="py-16 md:py-24">

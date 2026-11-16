@@ -1,35 +1,54 @@
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
+  const goToSection = (id: string) => {
+    setMobileMenuOpen(false);
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+      return;
     }
+    navigate("/");
+    window.setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 80);
   };
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/90 border-b border-border">
       <div className="container mx-auto px-6 py-3.5">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5" onClick={() => setMobileMenuOpen(false)}>
             <svg className="w-8 h-8" aria-hidden="true">
               <use href="#ft-mark" />
             </svg>
             <span className="text-base font-semibold tracking-tight font-display text-foreground">
               FaithTech.dev
             </span>
-          </div>
+          </Link>
 
           <ul className="hidden md:flex items-center gap-7">
             <li>
               <button
-                onClick={() => scrollToSection("services")}
+                type="button"
+                onClick={() => goToSection("who-i-serve")}
+                className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
+              >
+                Who I serve
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => goToSection("services")}
                 className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
                 Services
@@ -37,7 +56,8 @@ const Header = () => {
             </li>
             <li>
               <button
-                onClick={() => scrollToSection("work")}
+                type="button"
+                onClick={() => goToSection("work")}
                 className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
                 Work
@@ -45,7 +65,8 @@ const Header = () => {
             </li>
             <li>
               <button
-                onClick={() => scrollToSection("process")}
+                type="button"
+                onClick={() => goToSection("process")}
                 className="text-foreground/75 hover:text-foreground transition-colors font-sans-ui text-sm font-medium"
               >
                 Process
@@ -82,7 +103,17 @@ const Header = () => {
             <ul className="flex flex-col gap-4">
               <li>
                 <button
-                  onClick={() => scrollToSection("services")}
+                  type="button"
+                  onClick={() => goToSection("who-i-serve")}
+                  className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
+                >
+                  Who I serve
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => goToSection("services")}
                   className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
                   Services
@@ -90,7 +121,8 @@ const Header = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection("work")}
+                  type="button"
+                  onClick={() => goToSection("work")}
                   className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
                   Work
@@ -98,7 +130,8 @@ const Header = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection("process")}
+                  type="button"
+                  onClick={() => goToSection("process")}
                   className="text-foreground/80 hover:text-foreground transition-colors w-full text-left text-sm font-medium"
                 >
                   Process
