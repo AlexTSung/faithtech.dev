@@ -337,8 +337,7 @@ const Index = () => {
                   FaithTech.dev
                 </p>
                 <h1 className="text-[2.35rem] sm:text-5xl lg:text-[3.35rem] font-semibold mb-6 max-w-[18ch]">
-                  The product consultant churches and ministries trust to{" "}
-                  <span className="text-ember">build what others can&apos;t.</span>
+                  Personalized Digital Strategy for Churches, Non-Profits, and FaithTech Leaders
                 </h1>
                 <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 leading-relaxed">
                   10+ years shipping products that reach 300M+ people. Silicon Valley product rigor
