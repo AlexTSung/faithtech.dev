@@ -12,12 +12,6 @@ const gatewayBlurb: Record<string, string> = {
     "CEOs, product, and tech leaders shipping FaithTech who need senior product counsel at scale.",
 };
 
-const gatewayCta: Record<string, string> = {
-  churches: "For churches",
-  nonprofits: "For non-profits",
-  faithtech: "For FaithTech",
-};
-
 const AudienceGateway = () => {
   return (
     <section id="who-i-serve" className="py-16 md:py-24 border-t border-border/80">
@@ -59,7 +53,7 @@ const AudienceGateway = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-md self-start"
               >
                 <Link to={audience.path} className="inline-flex items-center gap-1.5">
-                  {gatewayCta[audience.id]}
+                  {audience.shortLabel}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

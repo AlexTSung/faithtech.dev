@@ -4,6 +4,8 @@ export type AudiencePage = {
   id: AudienceId;
   path: string;
   navLabel: string;
+  /** Short gateway / header label, e.g. "For Churches" */
+  shortLabel: string;
   eyebrow: string;
   h1: string;
   lead: string;
@@ -26,7 +28,8 @@ export const audiences: Record<AudienceId, AudiencePage> = {
     id: "churches",
     path: "/for-churches",
     navLabel: "Churches & Pastors",
-    eyebrow: "For churches & pastors",
+    shortLabel: "For Churches",
+    eyebrow: "For Churches & pastors",
     h1: "Church technology consulting for pastors who need digital strategy that gets adopted.",
     lead:
       "You carry the mission. I bring product clarity so your church invests in technology people actually use, not tools that sit unused. Pastoral experience meets Silicon Valley rigor.",
@@ -81,7 +84,8 @@ export const audiences: Record<AudienceId, AudiencePage> = {
     id: "nonprofits",
     path: "/for-nonprofits",
     navLabel: "Non-profits & Leaders",
-    eyebrow: "For non-profits & directors",
+    shortLabel: "For Non-profits",
+    eyebrow: "For Non-profits & directors",
     h1: "Non-profit product consulting for directors who cannot afford a wrong digital bet.",
     lead:
       "Directors and ministry leaders need more than a freelancer or a generic agency. You need someone who understands donors, beneficiaries, and the constraint of stewardship.",
@@ -136,6 +140,7 @@ export const audiences: Record<AudienceId, AudiencePage> = {
     id: "faithtech",
     path: "/for-faithtech",
     navLabel: "FaithTech Leaders",
+    shortLabel: "For FaithTech",
     eyebrow: "For FaithTech CEOs, product & tech leaders",
     h1: "FaithTech product consulting for CEOs, product, and tech leaders shipping at scale.",
     lead:

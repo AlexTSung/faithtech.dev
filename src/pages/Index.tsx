@@ -246,23 +246,6 @@ const cases = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "[PLACEHOLDER: Add a quote from a church leader or ministry partner about working with Alex. Two or three sentences about outcome.]",
-    name: "[Name]",
-    role: "[Title, Organization]",
-    initials: "??",
-  },
-  {
-    quote:
-      "[PLACEHOLDER: Add a quote from a faith tech team or founder. Focus on the product strategy or launch outcome.]",
-    name: "[Name]",
-    role: "[Title, Organization]",
-    initials: "??",
-  },
-];
-
 const Index = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -377,13 +360,7 @@ const Index = () => {
                       variant="outline"
                       className="rounded-md border-border font-medium text-sm"
                     >
-                      <Link to={a.path}>
-                        {a.id === "churches"
-                          ? "For churches"
-                          : a.id === "nonprofits"
-                            ? "For non-profits"
-                            : "For FaithTech"}
-                      </Link>
+                      <Link to={a.path}>{a.shortLabel}</Link>
                     </Button>
                   ))}
                 </div>
@@ -426,29 +403,7 @@ const Index = () => {
         {/* Who I serve: gateway into audience pages */}
         <AudienceGateway />
 
-        {/* Problem */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-6">
-            <div className="max-w-2xl md:ml-[8%] lg:ml-[12%]">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-4">
-                The Problem
-              </p>
-              <h2 className="text-2xl sm:text-3xl md:text-[2.15rem] font-semibold leading-tight mb-6">
-                Most churches invest in technology before they know what to build.
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                They hire developers before validating ideas. They choose platforms before
-                understanding their own workflows. They launch products their people never adopt,
-                and wonder why the mission didn&apos;t scale.
-              </p>
-              <p className="text-foreground font-semibold text-lg font-display">
-                That&apos;s the gap I close, before it costs you.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Process: editorial numbered list, not equal cards */}
+        {/* Process: editorial numbered list, not equal cards — follows Who I serve */}
         <section id="process" className="pb-16 md:pb-24 border-t border-border/80 pt-16 md:pt-20">
           <div className="container mx-auto px-6">
             <div className="md:flex md:items-end md:justify-between md:gap-12 mb-12">
@@ -487,6 +442,28 @@ const Index = () => {
                 );
               })}
             </ol>
+          </div>
+        </section>
+
+        {/* Problem */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-6">
+            <div className="max-w-2xl md:ml-[8%] lg:ml-[12%]">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-4">
+                The Problem
+              </p>
+              <h2 className="text-2xl sm:text-3xl md:text-[2.15rem] font-semibold leading-tight mb-6">
+                Most churches invest in technology before they know what to build.
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                They hire developers before validating ideas. They choose platforms before
+                understanding their own workflows. They launch products their people never adopt,
+                and wonder why the mission didn&apos;t scale.
+              </p>
+              <p className="text-foreground font-semibold text-lg font-display">
+                That&apos;s the gap I close, before it costs you.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -715,36 +692,6 @@ const Index = () => {
                     })}
                   </div>
                 </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="pb-16 md:pb-20">
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-10 md:mb-14">What partners say.</h2>
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-              {testimonials.map((t, i) => (
-                <blockquote
-                  key={i}
-                  className={`flex flex-col gap-5 ${i === 1 ? "md:mt-10" : ""}`}
-                >
-                  <p className="text-foreground leading-relaxed text-lg font-display font-medium">
-                    {t.quote}
-                  </p>
-                  <footer className="flex items-center gap-3 pt-2">
-                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-accent font-semibold text-xs">
-                      {t.initials}
-                    </div>
-                    <div>
-                      <cite className="not-italic text-sm font-semibold text-foreground block">
-                        {t.name}
-                      </cite>
-                      <p className="text-xs text-muted-foreground">{t.role}</p>
-                    </div>
-                  </footer>
-                </blockquote>
               ))}
             </div>
           </div>
