@@ -142,4 +142,8 @@
   .hover-rise {
     transition: none;
   }
+
+  .animate-\[scroll-left_40s_linear_infinite\] {
+    animation: none !important;
+  }
 }

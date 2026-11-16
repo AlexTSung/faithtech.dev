@@ -1,61 +1,72 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { audienceList } from "@/data/audiences";
 
 const Footer = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const goToSection = (id: string) => {
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+      return;
     }
+    navigate("/");
+    window.setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 80);
   };
 
   return (
     <footer className="bg-band-ink text-secondary-foreground py-12 md:py-16">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Brand */}
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="space-y-2">
-          <div className="flex items-center gap-3 mb-2">
+          <Link to="/" className="flex items-center gap-3 mb-2">
             <svg className="w-8 h-8" aria-hidden="true">
               <use href="#ft-mark" />
             </svg>
             <p className="font-bold text-secondary-foreground text-lg font-display">
               FaithTech.dev
             </p>
-          </div>
+          </Link>
           <p className="text-sm text-secondary-foreground/70">
-            Church & Non-Profit Tech Consulting
+            Church, Non-Profit & FaithTech Consulting
           </p>
           <p className="text-sm text-secondary-foreground/55">© 2026 FaithTech.dev</p>
         </div>
 
-        {/* Navigate */}
         <div className="space-y-3">
           <p className="font-semibold text-secondary-foreground text-sm uppercase tracking-wider">
             Navigate
           </p>
           <ul className="space-y-2 text-sm text-secondary-foreground/70">
             <li>
-              <a
-                href="#process"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("process");
-                }}
+              <button
+                type="button"
+                onClick={() => goToSection("who-i-serve")}
                 className="hover:text-primary transition-colors"
               >
-                About
-              </a>
+                Who I serve
+              </button>
             </li>
             <li>
-              <a
-                href="#services"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("services");
-                }}
+              <button
+                type="button"
+                onClick={() => goToSection("process")}
+                className="hover:text-primary transition-colors"
+              >
+                Process
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => goToSection("services")}
                 className="hover:text-primary transition-colors"
               >
                 Services
-              </a>
+              </button>
             </li>
             <li>
               <Link to="/portfolio" className="hover:text-primary transition-colors">
@@ -63,26 +74,32 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/discovery-sprint" className="hover:text-primary transition-colors">
-                Discovery Sprint
-              </Link>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                }}
+              <button
+                type="button"
+                onClick={() => goToSection("contact")}
                 className="hover:text-primary transition-colors"
               >
                 Contact
-              </a>
+              </button>
             </li>
           </ul>
         </div>
 
-        {/* Connect */}
+        <div className="space-y-3">
+          <p className="font-semibold text-secondary-foreground text-sm uppercase tracking-wider">
+            Who I serve
+          </p>
+          <ul className="space-y-2 text-sm text-secondary-foreground/70">
+            {audienceList.map((a) => (
+              <li key={a.id}>
+                <Link to={a.path} className="hover:text-primary transition-colors">
+                  {a.navLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="space-y-3">
           <p className="font-semibold text-secondary-foreground text-sm uppercase tracking-wider">
             Connect
@@ -107,16 +124,13 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                }}
+              <button
+                type="button"
+                onClick={() => goToSection("contact")}
                 className="inline-flex items-center font-medium text-primary hover:underline"
               >
                 Book a Free Strategy Call
-              </a>
+              </button>
             </li>
           </ul>
         </div>
