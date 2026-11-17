@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import ForChurches from "./pages/ForChurches";
 import ForNonprofits from "./pages/ForNonprofits";
 import ForFaithTech from "./pages/ForFaithTech";
+import DiscoverySprint from "./pages/DiscoverySprint";
+import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/for-churches" element={<ForChurches />} />
           <Route path="/for-nonprofits" element={<ForNonprofits />} />
           <Route path="/for-faithtech" element={<ForFaithTech />} />
+          <Route path="/discovery-sprint" element={<DiscoverySprint />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
