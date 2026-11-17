@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PartnerLogosMarquee from "@/components/PartnerLogosMarquee";
 import SeoHead from "@/components/SeoHead";
+import CallExpectations from "@/components/CallExpectations";
 import { Button } from "@/components/ui/button";
 import { audienceList, type AudiencePage } from "@/data/audiences";
 import { audienceJsonLd, audienceKeywords } from "@/lib/seo-schema";
@@ -59,10 +60,10 @@ const AudienceLanding = ({ audience }: Props) => {
                     Book a Free Strategy Call
                   </Button>
                   <Link
-                    to="/"
+                    to="/discovery-sprint"
                     className="text-sm font-medium text-foreground/80 hover:text-accent inline-flex items-center gap-1.5 group"
                   >
-                    Back to FaithTech.dev
+                    Discovery Sprint
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
@@ -188,15 +189,15 @@ const AudienceLanding = ({ audience }: Props) => {
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Book your strategy call
             </h2>
-            <p className="text-muted-foreground mb-8 text-lg">
-              Pick a time that works. You will leave with clearer next steps for your{" "}
-              {audience.id === "churches"
-                ? "church"
-                : audience.id === "nonprofits"
-                  ? "organization"
-                  : "product"}
-              .
-            </p>
+            <CallExpectations
+              intro={`Thirty minutes focused on your ${
+                audience.id === "churches"
+                  ? "church"
+                  : audience.id === "nonprofits"
+                    ? "organization"
+                    : "product"
+              }. No pitch deck. Clearer next steps whether we work together or not.`}
+            />
             <div className="w-full border border-border overflow-hidden mb-4 bg-card">
               <iframe
                 src="https://calendly.com/alex-sung-youversion/30min?embed_type=Inline&hide_landing_page_details=1"

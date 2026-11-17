@@ -30,9 +30,6 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import {
-  TrendingUp,
-  Users,
-  Zap,
   Search,
   Target,
   Wrench,
@@ -43,9 +40,8 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
-import caseEngagement from "@/assets/case-engagement.png";
-import casePlatform from "@/assets/case-platform.png";
-import caseTransformation from "@/assets/case-transformation.png";
+import CallExpectations from "@/components/CallExpectations";
+import { workCases } from "@/data/workCases";
 import heroVisual from "@/assets/hero-illustration.jpg";
 
 const contactSchema = z.object({
@@ -109,8 +105,8 @@ const services: {
       "UXR interviews + synthesis",
       "Prioritized roadmap + PLG strategy",
     ],
-    cta: "Book a Discovery Sprint call",
-    href: "#contact",
+    cta: "Learn about the Discovery Sprint",
+    href: "/discovery-sprint",
     featured: false,
   },
   {
@@ -127,7 +123,7 @@ const services: {
       "Launch strategy + go-to-market",
     ],
     cta: "See the work",
-    href: "#work",
+    href: "/portfolio",
     featured: true,
   },
   {
@@ -206,45 +202,6 @@ const heroStats = [
   { value: "100+", label: "partnerships with Bible societies & ministries" },
   { value: "10x", label: "impact through strategy & product excellence" },
   { value: "15+", label: "Years in ministry" },
-];
-
-const cases = [
-  {
-    image: caseEngagement,
-    title: "Global Scripture Engagement",
-    clientType: "Bible / digital ministry",
-    description:
-      "Drove double-digit growth with habit formation, community, and content personalization.",
-    metrics: [
-      { label: "Installs", value: "109M+", icon: Zap },
-      { label: "MAU (L28)", value: "53.5M+", icon: Users },
-      { label: "DAU", value: "5.7M+", icon: TrendingUp },
-    ],
-  },
-  {
-    image: casePlatform,
-    title: "YouVersion Platform",
-    clientType: "Bible / platform",
-    description:
-      "Giving developers around the world access to our technology to build Bible apps. Build applications and integrate with the world's most popular Bible platform.",
-    metrics: [
-      { label: "Bibles", value: "1,480+", icon: Zap },
-      { label: "Publishers", value: "34+", icon: Users },
-      { label: "Languages", value: "1,280+", icon: TrendingUp },
-    ],
-  },
-  {
-    image: caseTransformation,
-    title: "Connecting Bible Users to Churches",
-    clientType: "Denomination / church network",
-    description:
-      "Bridging digital Bible engagement with local church community and growth.",
-    metrics: [
-      { label: "Churches", value: "20K+", icon: Users },
-      { label: "Countries", value: "150+", icon: Zap },
-      { label: "Growth of churches", value: "215+%", icon: TrendingUp },
-    ],
-  },
 ];
 
 const Index = () => {
@@ -675,9 +632,9 @@ const Index = () => {
               </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-              {cases.map((caseStudy, i) => (
+              {workCases.map((caseStudy, i) => (
                 <article
-                  key={caseStudy.title}
+                  key={caseStudy.slug}
                   className={`flex flex-col ${i === 1 ? "md:mt-8" : i === 2 ? "lg:mt-4" : ""}`}
                 >
                   <img
@@ -690,14 +647,13 @@ const Index = () => {
                   </span>
                   <h3 className="text-xl font-semibold font-display mt-2 mb-3">{caseStudy.title}</h3>
                   <p className="text-muted-foreground text-sm mb-4 flex-1">{caseStudy.description}</p>
-                  <button
-                    type="button"
-                    onClick={() => scrollToSection("contact")}
+                  <Link
+                    to={`/portfolio#${caseStudy.slug}`}
                     className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group self-start"
                   >
-                    Discuss this work
+                    View on portfolio
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </button>
+                  </Link>
                   <div className="space-y-2.5 border-t border-border pt-4">
                     {caseStudy.metrics.map((m) => {
                       const Icon = m.icon;
@@ -712,6 +668,15 @@ const Index = () => {
                   </div>
                 </article>
               ))}
+            </div>
+            <div className="mt-10 md:mt-12">
+              <Link
+                to="/portfolio"
+                className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 hover:text-accent group"
+              >
+                Full portfolio
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
         </section>
@@ -744,9 +709,10 @@ const Index = () => {
               Let&apos;s build something that lasts.
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Most clients start with a 30-minute strategy call. You&apos;ll leave with clarity on
-              what to build, in what order, and why, whether we work together or not.
+              Most clients start with a 30-minute strategy call. Pick a time below when you are ready.
             </p>
+
+            <CallExpectations />
 
             <div className="w-full border border-border overflow-hidden mb-8 bg-card">
               <iframe
