@@ -57,7 +57,7 @@ const Insights = () => (
             <Card key={index} className="overflow-hidden hover-rise flex flex-col">
               <img
                 src={card.image}
-                alt=""
+                alt={`${card.title}: faith tech and ministry product insight`}
                 className="w-full h-44 object-cover bg-muted"
               />
               <div className="p-6 flex-1 flex flex-col">

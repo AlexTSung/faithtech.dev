@@ -57,7 +57,7 @@ const About = () => (
             <Card key={index} className="overflow-hidden hover-rise flex flex-col">
               <img
                 src={card.image}
-                alt=""
+                alt={`${card.title}: church and ministry technology consulting experience`}
                 className="w-full h-44 object-cover bg-muted"
               />
               <div className="p-6 flex-1 flex flex-col">

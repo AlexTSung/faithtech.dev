@@ -78,7 +78,7 @@ const CaseStudies = () => {
               >
                 <img
                   src={caseStudy.image}
-                  alt=""
+                  alt={`${caseStudy.title}: church technology and faith tech case study`}
                   className="w-full h-44 object-cover bg-muted"
                 />
                 <div className="p-6 flex-1 flex flex-col">

@@ -6,6 +6,7 @@ import PartnerLogosMarquee from "@/components/PartnerLogosMarquee";
 import SeoHead from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
 import { audienceList, type AudiencePage } from "@/data/audiences";
+import { audienceJsonLd, audienceKeywords } from "@/lib/seo-schema";
 import heroVisual from "@/assets/hero-illustration.jpg";
 import { useEffect } from "react";
 
@@ -31,6 +32,8 @@ const AudienceLanding = ({ audience }: Props) => {
         title={audience.metaTitle}
         description={audience.metaDescription}
         path={audience.path}
+        keywords={audienceKeywords[audience.id]}
+        jsonLd={audienceJsonLd(audience)}
       />
       <Header />
       <main>
@@ -230,7 +233,11 @@ const AudienceLanding = ({ audience }: Props) => {
                     {a.navLabel}
                   </h3>
                   <span className="text-sm font-medium text-foreground/75 inline-flex items-center gap-1.5">
-                    View page
+                    {a.id === "churches"
+                      ? "Church technology consulting"
+                      : a.id === "nonprofits"
+                        ? "Non-profit product consulting"
+                        : "FaithTech product consulting"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </Link>
