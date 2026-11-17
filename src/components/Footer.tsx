@@ -125,6 +125,16 @@ const Footer = () => {
           </p>
           <ul className="space-y-2 text-sm text-secondary-foreground/70">
             <li>
+              <Link to="/discovery-sprint" className="hover:text-primary transition-colors">
+                Discovery Sprint
+              </Link>
+            </li>
+            <li>
+              <Link to="/portfolio" className="hover:text-primary transition-colors">
+                Portfolio
+              </Link>
+            </li>
+            <li>
               <a
                 href="https://www.linkedin.com/in/alextimsung"
                 target="_blank"
