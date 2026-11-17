@@ -69,6 +69,15 @@ const Footer = () => {
               </button>
             </li>
             <li>
+              <button
+                type="button"
+                onClick={() => goToSection("work")}
+                className="hover:text-primary transition-colors"
+              >
+                Work
+              </button>
+            </li>
+            <li>
               <Link to="/portfolio" className="hover:text-primary transition-colors">
                 Portfolio
               </Link>
@@ -93,7 +102,7 @@ const Footer = () => {
             {audienceList.map((a) => (
               <li key={a.id}>
                 <Link to={a.path} className="hover:text-primary transition-colors">
-                  {a.navLabel}
+                  {a.shortLabel}
                 </Link>
               </li>
             ))}
