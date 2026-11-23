@@ -7,18 +7,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { TrendingUp, Users, Zap } from "lucide-react";
-import caseEngagement from "@/assets/case-engagement.jpg";
-import caseBibleEngagement from "@/assets/case-bible-engagement.jpg";
-import caseChurches from "@/assets/case-churches.jpg";
+import casePlaceholder from "@/assets/case-placeholder.svg";
 
 const cases = [
   {
-    image: caseEngagement,
-    title: "Global Scripture Engagement",
+    image: casePlaceholder,
+    title: "The Bible App",
     clientType: "Bible / digital ministry",
-    description: "Drove double-digit growth with habit formation, community, and content personalization.",
-    imageAlt:
-      "Diverse hands holding a smartphone open to Scripture with warm amber light and a soft world map glow, Global Scripture Engagement case study",
+    description:
+      "Habit formation, community, and content personalization drove double-digit growth for the world's most-used Bible App. If your ministry needs people to open Scripture more often and stay for the long haul, this is the playbook: clear retention loops, thoughtful content, and product decisions measured against real engagement. The same principles scale from a single church app to a global platform.",
+    imageAlt: "Placeholder for The Bible App case study photography",
     demoUrl: "https://www.youversion.com/bible-app",
     embedBlocked: true,
     metrics: [
@@ -28,13 +26,12 @@ const cases = [
     ],
   },
   {
-    image: caseBibleEngagement,
-    title: "Digital Bible Engagement",
+    image: casePlaceholder,
+    title: "State of the Bible",
     clientType: "Bible / translations",
     description:
-      "Giving away the digital Bible for free around the world with our Bible societies, translators, and partners. Building the platform that gives our global Bible the ability to easily upload content and Bible versions while also keeping up-to-date on the latest trends & insights on the Bible App.",
-    imageAlt:
-      "Open Bible beside a phone showing a digital Bible reading screen in warm amber lantern light, Digital Bible Engagement case study",
+      "Giving away the digital Bible for free around the world with Bible societies, translators, and partners. We built the platform so global Bible partners can upload content and Bible versions with less friction, while staying current on trends and insights from the Bible App. For publishers and ministry leaders, that means faster distribution, clearer partner workflows, and decisions grounded in how people actually engage Scripture today.",
+    imageAlt: "Placeholder for State of the Bible case study photography",
     demoUrl: "https://www.youversion.com/bible-app",
     embedBlocked: true,
     metrics: [
@@ -44,12 +41,12 @@ const cases = [
     ],
   },
   {
-    image: caseChurches,
-    title: "Connecting Bible Users to Churches",
+    image: casePlaceholder,
+    title: "Digital Outreach Strategy for Churches",
     clientType: "Denomination / church network",
-    description: "Bridging digital Bible engagement with local church community and growth.",
-    imageAlt:
-      "Quiet church sanctuary aisle with wooden pews and amber lantern light, Connecting Bible Users to Churches case study",
+    description:
+      "Bridging digital Bible engagement with local church community and growth. When people meet God in an app, the next step should be a real church family, not a dead end online. This work helps denominations and church networks turn digital interest into visits, belonging, and measurable church growth without losing the mission in the metrics.",
+    imageAlt: "Placeholder for Digital Outreach Strategy for Churches case study photography",
     demoUrl: "https://www.youversion.com/churches",
     embedBlocked: true,
     metrics: [
@@ -131,12 +128,12 @@ const CaseStudies = () => {
           {demoState?.embedBlocked ? (
             <div className="px-6 pb-6 space-y-4">
               <p className="text-muted-foreground text-sm">
-                {demoState?.title === "Global Scripture Engagement"
-                  ? "Please click button below and see the impact on Global Scripture Engagement with YouVersion"
-                  : demoState?.title === "Connecting Bible Users to Churches"
-                    ? "Please click the button below and witness the impact of connecting Bible users to local churches."
-                    : demoState?.title === "Digital Bible Engagement"
-                      ? "Please click the button below to see Digital Bible Engagement across translations, partners, and the Bible App."
+                {demoState?.title === "The Bible App"
+                  ? "Please click the button below to see the impact of The Bible App and global Scripture engagement."
+                  : demoState?.title === "Digital Outreach Strategy for Churches"
+                    ? "Please click the button below to see how digital outreach connects Bible users to local churches."
+                    : demoState?.title === "State of the Bible"
+                      ? "Please click the button below to explore State of the Bible work across translations, partners, and the Bible App."
                       : `Please click the button below and open a new tab to see the impact on ${demoState?.title ?? "this work"}.`}
               </p>
               {demoState?.url && (
