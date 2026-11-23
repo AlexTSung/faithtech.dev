@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { TrendingUp, Users, Zap } from "lucide-react";
-import caseEngagement from "@/assets/case-engagement.png";
-import casePlatform from "@/assets/case-platform.png";
-import caseTransformation from "@/assets/case-transformation.png";
+import caseEngagement from "@/assets/case-engagement.jpg";
+import caseBibleEngagement from "@/assets/case-bible-engagement.jpg";
+import caseChurches from "@/assets/case-churches.jpg";
 
 const cases = [
   {
@@ -17,6 +17,8 @@ const cases = [
     title: "Global Scripture Engagement",
     clientType: "Bible / digital ministry",
     description: "Drove double-digit growth with habit formation, community, and content personalization.",
+    imageAlt:
+      "Diverse hands holding a smartphone open to Scripture with warm amber light and a soft world map glow, Global Scripture Engagement case study",
     demoUrl: "https://www.youversion.com/bible-app",
     embedBlocked: true,
     metrics: [
@@ -26,12 +28,15 @@ const cases = [
     ],
   },
   {
-    image: casePlatform,
-    title: "YouVersion Platform",
-    clientType: "Bible / platform",
-    description: "Giving developers around the world access to our technology to build Bible apps. Build applications and integrate with the world's most popular Bible platform.",
-    platformUrl: "https://platform.youversion.com/bibles",
-    demoUrl: "https://platform.youversion.com/",
+    image: caseBibleEngagement,
+    title: "Digital Bible Engagement",
+    clientType: "Bible / translations",
+    description:
+      "Giving away the digital Bible for free around the world with our Bible societies, translators, and partners. Building the platform that gives our global Bible the ability to easily upload content and Bible versions while also keeping up-to-date on the latest trends & insights on the Bible App.",
+    imageAlt:
+      "Open Bible beside a phone showing a digital Bible reading screen in warm amber lantern light, Digital Bible Engagement case study",
+    demoUrl: "https://www.youversion.com/bible-app",
+    embedBlocked: true,
     metrics: [
       { label: "Bibles", value: "1,480+", icon: Zap },
       { label: "Publishers", value: "34+", icon: Users },
@@ -39,10 +44,12 @@ const cases = [
     ],
   },
   {
-    image: caseTransformation,
+    image: caseChurches,
     title: "Connecting Bible Users to Churches",
     clientType: "Denomination / church network",
     description: "Bridging digital Bible engagement with local church community and growth.",
+    imageAlt:
+      "Quiet church sanctuary aisle with wooden pews and amber lantern light, Connecting Bible Users to Churches case study",
     demoUrl: "https://www.youversion.com/churches",
     embedBlocked: true,
     metrics: [
@@ -61,51 +68,43 @@ const CaseStudies = () => {
       <div className="container mx-auto px-6">
         <h3 className="text-3xl md:text-4xl font-bold mb-4">See the work</h3>
         <p className="text-muted-foreground max-w-2xl mb-10">
-          How I’ve helped church leaders, faith tech teams, and Christian entrepreneurs ship products that scale—without losing the mission. From YouVersion-scale platforms to national ministry roadmaps: strategy, product, and execution in your corner.
+          If you lead a church, ministry, or faith tech team, these case studies show what&apos;s possible. Real products. Real users. Real outcomes.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {cases.map((caseStudy, index) => {
             const { metrics } = caseStudy;
             const hasDemo = "demoUrl" in caseStudy && caseStudy.demoUrl;
             return (
               <Card
                 key={index}
-                className={`overflow-hidden hover-rise flex flex-col ${hasDemo ? "cursor-pointer" : ""}`}
+                className={`overflow-hidden hover-rise flex h-full flex-col ${hasDemo ? "cursor-pointer" : ""}`}
                 role={hasDemo ? "button" : undefined}
                 tabIndex={hasDemo ? 0 : undefined}
                 onClick={hasDemo ? () => setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title, embedBlocked: !!(caseStudy as { embedBlocked?: boolean }).embedBlocked }) : undefined}
                 onKeyDown={hasDemo ? (e) => e.key === "Enter" && setDemoState({ url: caseStudy.demoUrl!, title: caseStudy.title, embedBlocked: !!(caseStudy as { embedBlocked?: boolean }).embedBlocked }) : undefined}
               >
-                <img
-                  src={caseStudy.image}
-                  alt={`${caseStudy.title}: church technology and faith tech case study`}
-                  className="w-full h-44 object-cover bg-muted"
-                />
+                <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
+                  <img
+                    src={caseStudy.image}
+                    alt={caseStudy.imageAlt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <span className="text-xs font-medium text-primary uppercase tracking-wider">
                     {caseStudy.clientType}
                   </span>
-                  <h4 className="text-xl font-bold mt-2 mb-3">{caseStudy.title}</h4>
+                  <h4 className="text-xl font-bold mt-2 mb-3 min-h-[3.5rem]">{caseStudy.title}</h4>
                   <p className="text-muted-foreground text-sm mb-4 flex-1">
                     {caseStudy.description}
                   </p>
-                  {"platformUrl" in caseStudy && caseStudy.platformUrl && (
-                    <a
-                      href={caseStudy.platformUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-primary hover:underline mb-4 inline-block"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      platform.youversion.com/bibles →
-                    </a>
-                  )}
                   {hasDemo && (
                     <span className="text-sm text-primary font-medium mb-4 inline-block">
                       View case study →
                     </span>
                   )}
-                  <div className="space-y-3">
+                  <div className="mt-auto space-y-3">
                     {metrics.map((m, i) => {
                       const Icon = m.icon;
                       return (
@@ -136,7 +135,9 @@ const CaseStudies = () => {
                   ? "Please click button below and see the impact on Global Scripture Engagement with YouVersion"
                   : demoState?.title === "Connecting Bible Users to Churches"
                     ? "Please click the button below and witness the impact of connecting Bible users to local churches."
-                    : `Please click the button below and open a new tab to see the impact on ${demoState?.title ?? "this work"}.`}
+                    : demoState?.title === "Digital Bible Engagement"
+                      ? "Please click the button below to see Digital Bible Engagement across translations, partners, and the Bible App."
+                      : `Please click the button below and open a new tab to see the impact on ${demoState?.title ?? "this work"}.`}
               </p>
               {demoState?.url && (
                 <a
