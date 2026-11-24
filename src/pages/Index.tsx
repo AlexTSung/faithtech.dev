@@ -30,9 +30,6 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import {
-  TrendingUp,
-  Users,
-  Zap,
   Search,
   Target,
   Wrench,
@@ -43,9 +40,8 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
-import caseBibleApp from "@/assets/case-bible-app.jpg";
-import caseStateOfTheBible from "@/assets/case-state-of-the-bible.jpg";
-import caseOutreach from "@/assets/case-outreach.jpg";
+import CallExpectations from "@/components/CallExpectations";
+import { workCases } from "@/data/workCases";
 import heroVisual from "@/assets/hero-illustration.jpg";
 
 const contactSchema = z.object({
@@ -109,8 +105,8 @@ const services: {
       "UXR interviews + synthesis",
       "Prioritized roadmap + PLG strategy",
     ],
-    cta: "Book a Discovery Sprint call",
-    href: "#contact",
+    cta: "Learn about the Discovery Sprint",
+    href: "/discovery-sprint",
     featured: false,
   },
   {
@@ -127,7 +123,7 @@ const services: {
       "Launch strategy + go-to-market",
     ],
     cta: "See the work",
-    href: "#work",
+    href: "/portfolio",
     featured: true,
   },
   {
@@ -206,51 +202,6 @@ const heroStats = [
   { value: "100+", label: "partnerships with Bible societies & ministries" },
   { value: "10x", label: "impact through strategy & product excellence" },
   { value: "15+", label: "Years in ministry" },
-];
-
-const cases = [
-  {
-    image: caseBibleApp,
-    title: "The Bible App",
-    clientType: "Bible / digital ministry",
-    description:
-      "Habit formation, community, and content personalization drove double-digit growth for the world's most-used Bible App. If your ministry needs people to open Scripture more often and stay for the long haul, this is the playbook: clear retention loops, thoughtful content, and product decisions measured against real engagement. The same principles scale from a single church app to a global platform.",
-    imageAlt:
-      "The Bible App Discover screen showing Spoken Gospel Just Released video devotionals for Romans, Nahum, and Titus",
-    metrics: [
-      { label: "Installs", value: "109M+", icon: Zap },
-      { label: "MAU (L28)", value: "53.5M+", icon: Users },
-      { label: "DAU", value: "5.7M+", icon: TrendingUp },
-    ],
-  },
-  {
-    image: caseStateOfTheBible,
-    title: "State of the Bible",
-    clientType: "Bible / translations",
-    description:
-      "Giving away the digital Bible for free around the world with Bible societies, translators, and partners. We built the platform so global Bible partners can upload content and Bible versions with less friction, while staying current on trends and insights from the Bible App. For publishers and ministry leaders, that means faster distribution, clearer partner workflows, and decisions grounded in how people actually engage Scripture today.",
-    imageAlt:
-      "State of the Bible stage panel with Focus on the Family Bible App Impact for 2025 showing 404,381 lives impacted",
-    metrics: [
-      { label: "Bibles", value: "1,480+", icon: Zap },
-      { label: "Publishers", value: "34+", icon: Users },
-      { label: "Languages", value: "1,280+", icon: TrendingUp },
-    ],
-  },
-  {
-    image: caseOutreach,
-    title: "Digital Outreach Strategy for Churches",
-    clientType: "Denomination / church network",
-    description:
-      "Bridging digital Bible engagement with local church community and growth. When people meet God in an app, the next step should be a real church family, not a dead end online. This work helps denominations and church networks turn digital interest into visits, belonging, and measurable church growth without losing the mission in the metrics.",
-    imageAlt:
-      "Digital Outreach Strategy for Churches conference ballroom with audience facing a magenta-lit stage and LED screens",
-    metrics: [
-      { label: "Churches", value: "20K+", icon: Users },
-      { label: "Countries", value: "150+", icon: Zap },
-      { label: "Growth of churches", value: "215+%", icon: TrendingUp },
-    ],
-  },
 ];
 
 const Index = () => {
@@ -681,8 +632,8 @@ const Index = () => {
               </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 items-stretch">
-              {cases.map((caseStudy) => (
-                <article key={caseStudy.title} className="flex h-full flex-col">
+              {workCases.map((caseStudy) => (
+                <article key={caseStudy.slug} className="flex h-full flex-col">
                   <div className="mb-5 aspect-[16/10] w-full overflow-hidden bg-muted">
                     <img
                       src={caseStudy.image}
@@ -699,14 +650,13 @@ const Index = () => {
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4">{caseStudy.description}</p>
                   <div className="mt-auto">
-                    <button
-                      type="button"
-                      onClick={() => scrollToSection("contact")}
+                    <Link
+                      to={`/portfolio#${caseStudy.slug}`}
                       className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group"
                     >
-                      Discuss this work
+                      View on portfolio
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </button>
+                    </Link>
                     <div className="space-y-2.5 border-t border-border pt-4">
                       {caseStudy.metrics.map((m) => {
                         const Icon = m.icon;
@@ -722,6 +672,15 @@ const Index = () => {
                   </div>
                 </article>
               ))}
+            </div>
+            <div className="mt-10 md:mt-12">
+              <Link
+                to="/portfolio"
+                className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 hover:text-accent group"
+              >
+                Full portfolio
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
         </section>
@@ -754,9 +713,10 @@ const Index = () => {
               Let&apos;s build something that lasts.
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Most clients start with a 30-minute strategy call. You&apos;ll leave with clarity on
-              what to build, in what order, and why, whether we work together or not.
+              Most clients start with a 30-minute strategy call. Pick a time below when you are ready.
             </p>
+
+            <CallExpectations />
 
             <div className="w-full border border-border overflow-hidden mb-8 bg-card">
               <iframe
