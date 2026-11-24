@@ -43,9 +43,9 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
-import caseEngagement from "@/assets/case-engagement.png";
-import casePlatform from "@/assets/case-platform.png";
-import caseTransformation from "@/assets/case-transformation.png";
+import caseBibleApp from "@/assets/case-bible-app.jpg";
+import caseStateOfTheBible from "@/assets/case-state-of-the-bible.jpg";
+import caseOutreach from "@/assets/case-outreach.jpg";
 import heroVisual from "@/assets/hero-illustration.jpg";
 
 const contactSchema = z.object({
@@ -210,11 +210,13 @@ const heroStats = [
 
 const cases = [
   {
-    image: caseEngagement,
-    title: "Global Scripture Engagement",
+    image: caseBibleApp,
+    title: "The Bible App",
     clientType: "Bible / digital ministry",
     description:
-      "Drove double-digit growth with habit formation, community, and content personalization.",
+      "Habit formation, community, and content personalization drove double-digit growth for the world's most-used Bible App. If your ministry needs people to open Scripture more often and stay for the long haul, this is the playbook: clear retention loops, thoughtful content, and product decisions measured against real engagement. The same principles scale from a single church app to a global platform.",
+    imageAlt:
+      "The Bible App Discover screen showing Spoken Gospel Just Released video devotionals for Romans, Nahum, and Titus",
     metrics: [
       { label: "Installs", value: "109M+", icon: Zap },
       { label: "MAU (L28)", value: "53.5M+", icon: Users },
@@ -222,11 +224,13 @@ const cases = [
     ],
   },
   {
-    image: casePlatform,
-    title: "YouVersion Platform",
-    clientType: "Bible / platform",
+    image: caseStateOfTheBible,
+    title: "State of the Bible",
+    clientType: "Bible / translations",
     description:
-      "Giving developers around the world access to our technology to build Bible apps. Build applications and integrate with the world's most popular Bible platform.",
+      "Giving away the digital Bible for free around the world with Bible societies, translators, and partners. We built the platform so global Bible partners can upload content and Bible versions with less friction, while staying current on trends and insights from the Bible App. For publishers and ministry leaders, that means faster distribution, clearer partner workflows, and decisions grounded in how people actually engage Scripture today.",
+    imageAlt:
+      "State of the Bible stage panel with Focus on the Family Bible App Impact for 2025 showing 404,381 lives impacted",
     metrics: [
       { label: "Bibles", value: "1,480+", icon: Zap },
       { label: "Publishers", value: "34+", icon: Users },
@@ -234,11 +238,13 @@ const cases = [
     ],
   },
   {
-    image: caseTransformation,
-    title: "Connecting Bible Users to Churches",
+    image: caseOutreach,
+    title: "Digital Outreach Strategy for Churches",
     clientType: "Denomination / church network",
     description:
-      "Bridging digital Bible engagement with local church community and growth.",
+      "Bridging digital Bible engagement with local church community and growth. When people meet God in an app, the next step should be a real church family, not a dead end online. This work helps denominations and church networks turn digital interest into visits, belonging, and measurable church growth without losing the mission in the metrics.",
+    imageAlt:
+      "Digital Outreach Strategy for Churches conference ballroom with audience facing a magenta-lit stage and LED screens",
     metrics: [
       { label: "Churches", value: "20K+", icon: Users },
       { label: "Countries", value: "150+", icon: Zap },
@@ -674,41 +680,45 @@ const Index = () => {
                 </p>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-              {cases.map((caseStudy, i) => (
-                <article
-                  key={caseStudy.title}
-                  className={`flex flex-col ${i === 1 ? "md:mt-8" : i === 2 ? "lg:mt-4" : ""}`}
-                >
-                  <img
-                    src={caseStudy.image}
-                    alt={`${caseStudy.title}: church technology and faith tech case study`}
-                    className="w-full h-44 object-cover bg-muted mb-5"
-                  />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 items-stretch">
+              {cases.map((caseStudy) => (
+                <article key={caseStudy.title} className="flex h-full flex-col">
+                  <div className="mb-5 aspect-[16/10] w-full overflow-hidden bg-muted">
+                    <img
+                      src={caseStudy.image}
+                      alt={caseStudy.imageAlt}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                   <span className="text-xs font-medium text-accent uppercase tracking-[0.12em]">
                     {caseStudy.clientType}
                   </span>
-                  <h3 className="text-xl font-semibold font-display mt-2 mb-3">{caseStudy.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 flex-1">{caseStudy.description}</p>
-                  <button
-                    type="button"
-                    onClick={() => scrollToSection("contact")}
-                    className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group self-start"
-                  >
-                    Discuss this work
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </button>
-                  <div className="space-y-2.5 border-t border-border pt-4">
-                    {caseStudy.metrics.map((m) => {
-                      const Icon = m.icon;
-                      return (
-                        <div key={m.label} className="flex items-center gap-2 text-sm">
-                          <Icon className="h-4 w-4 text-primary flex-shrink-0" />
-                          <span className="text-muted-foreground">{m.label}</span>
-                          <span className="font-semibold text-foreground ml-auto">{m.value}</span>
-                        </div>
-                      );
-                    })}
+                  <h3 className="text-xl font-semibold font-display mt-2 mb-3 min-h-[3.5rem] leading-snug">
+                    {caseStudy.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4">{caseStudy.description}</p>
+                  <div className="mt-auto">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("contact")}
+                      className="text-sm font-semibold text-foreground inline-flex items-center gap-1.5 mb-5 hover:text-accent group"
+                    >
+                      Discuss this work
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </button>
+                    <div className="space-y-2.5 border-t border-border pt-4">
+                      {caseStudy.metrics.map((m) => {
+                        const Icon = m.icon;
+                        return (
+                          <div key={m.label} className="flex items-center gap-2 text-sm">
+                            <Icon className="h-4 w-4 text-primary flex-shrink-0" />
+                            <span className="text-muted-foreground">{m.label}</span>
+                            <span className="font-semibold text-foreground ml-auto">{m.value}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </article>
               ))}
